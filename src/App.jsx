@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ThemeProvider } from "styled-components";
-import { defaultTheme, themesOptions } from "./style/theme.jsx";
-import { GlobalStyles } from "./style/global.jsx";
+import React, {useState, useRef, useEffect} from "react";
+import {ThemeProvider} from "styled-components";
+import {defaultTheme, themesOptions} from "./style/theme.jsx";
+import {GlobalStyles} from "./style/global.jsx";
 import TypeBox from "./components/features/TypeBox/TypeBox.jsx";
 import SentenceBox from "./components/features/SentenceBox/SentenceBox.jsx";
 import {
@@ -21,11 +21,11 @@ function App() {
         const stickyTheme = window.localStorage.getItem("theme");
         if (stickyTheme !== null) {
             const localTheme = JSON.parse(stickyTheme);
-            const upstreamTheme = themesOptions.find(
-                (e) => e.label === localTheme.label
-            ).value;
-            const isDeepEqual = localTheme === upstreamTheme;
-            return isDeepEqual ? localTheme : upstreamTheme;
+            // const upstreamTheme = themesOptions.find(
+            //     (e) => e.label === localTheme.label
+            //).value;
+            // const isDeepEqual = localTheme === upstreamTheme;
+            // return isDeepEqual ? localTheme : upstreamTheme;
         }
         return defaultTheme;
     });
@@ -124,7 +124,7 @@ function App() {
             <>
                 <DynamicBackground theme={theme}></DynamicBackground>
                 <div className="canvas">
-                    <GlobalStyles />
+                    <GlobalStyles/>
                     <Nav isFocusedMode={isFocusedMode}/>
 
                     {isWordGameMode && (
@@ -154,27 +154,27 @@ function App() {
                         />
                     )}
 
-                   <div className="bottomBar">
-                       <FooterMenu
+                    <div className="bottomBar">
+                        <FooterMenu
 
-                           isWordGameMode={isWordGameMode}
-                           themesOptions={themesOptions}
-                           theme={theme}
-                           toggleUltraZenMode={toggleUltraZenMode}
-                           handleThemeChange={handleThemeChange}
-                           toggleFocusedMode={toggleFocusedMode}
-                           toggleCoffeeMode={toggleCoffeeMode}
-                           isCoffeeMode={isCoffeeMode}
-                           isUltraZenMode={isUltraZenMode}
-                           isFocusedMode={isFocusedMode}
-                           gameMode={gameMode}
-                           handleGameModeChange={handleGameModeChange}
-                           isTrainerMode={isTrainerMode}
-                           toggleTrainerMode={toggleTrainerMode}
-                           isWordsCardMode={isWordsCardMode}
-                           toggleWordsCardMode={toggleWordsCardMode}
-                       ></FooterMenu>
-                   </div>
+                            isWordGameMode={isWordGameMode}
+                            themesOptions={themesOptions}
+                            theme={theme}
+                            toggleUltraZenMode={toggleUltraZenMode}
+                            handleThemeChange={handleThemeChange}
+                            toggleFocusedMode={toggleFocusedMode}
+                            toggleCoffeeMode={toggleCoffeeMode}
+                            isCoffeeMode={isCoffeeMode}
+                            isUltraZenMode={isUltraZenMode}
+                            isFocusedMode={isFocusedMode}
+                            gameMode={gameMode}
+                            handleGameModeChange={handleGameModeChange}
+                            isTrainerMode={isTrainerMode}
+                            toggleTrainerMode={toggleTrainerMode}
+                            isWordsCardMode={isWordsCardMode}
+                            toggleWordsCardMode={toggleWordsCardMode}
+                        ></FooterMenu>
+                    </div>
                 </div>
             </>
         </ThemeProvider>

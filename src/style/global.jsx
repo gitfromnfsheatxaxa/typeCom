@@ -129,14 +129,25 @@ export const GlobalStyles = createGlobalStyle`
         z-index: 999;
         position: fixed;
         bottom: 0;
+        left: 0;
         width: 100%;
-        .footer-bar{
-            padding: 10px;
-            width: 40%;
+
+        .footer-bar {
+            width: 80%;
+            padding: 20px 0;
             display: flex;
-            justify-content: space-between;
+            justify-content: start;
             margin: auto;
+            gap: 0 15px;
             align-items: center;
+            
+        }
+        @media screen and (max-width: 430px) {
+            .footer-bar {
+                gap: 0;
+                width: 90%;
+             
+            }
         }
     }
 
@@ -162,7 +173,7 @@ export const GlobalStyles = createGlobalStyle`
         gap: 20px;
     }
 
-        .custom-tooltip {
+    .custom-tooltip {
         position: relative;
     }
 
@@ -187,7 +198,7 @@ export const GlobalStyles = createGlobalStyle`
 
     .stats {
         display: block;
-        max-width: 1000px;
+        width: 80%;
         margin-top: 50px;
         margin-bottom: 20px;
         margin-left: auto;
@@ -260,7 +271,7 @@ export const GlobalStyles = createGlobalStyle`
     .type-box {
         display: block;
         width: 80%;
-        height: 140px;
+        height: 18vh;
         overflow: hidden;
         margin-left: auto;
         margin-right: auto;
@@ -275,7 +286,6 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-   
 
     .words {
         color: ${({theme}) => theme.textTypeBox};
@@ -383,7 +393,7 @@ export const GlobalStyles = createGlobalStyle`
 
     .caret-char-right {
         border-right: 1px solid ${({theme}) => theme.stats};
-        border-left: 1x solid transparent;
+        border-left: 1px solid transparent;
 
     }
 
@@ -641,7 +651,7 @@ export const GlobalStyles = createGlobalStyle`
 
     .type-box-sentence {
         display: block;
-        max-width: 1000px;
+        width: 80%;
         height: 240px;
         overflow: hidden;
         margin-left: auto;
@@ -685,7 +695,6 @@ export const GlobalStyles = createGlobalStyle`
     .row-4 {
         padding-left: 0em;
     }
-
     ul {
         display: block;
         list-style-type: disc;
@@ -908,5 +917,34 @@ export const GlobalStyles = createGlobalStyle`
         display: flex;
         align-items: center;
         gap: 8px;
+    }
+
+    .box-cursor {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-menu {
+        width: 100vw;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .restart-center {
+        width: 40px;
+    }
+
+    .restart-div {
+        position: fixed;
+        top: 80%;
+        left: calc(50% - 20px);
+    }
+    .random-text {
+        transition: 1s !important;
     }
 `;

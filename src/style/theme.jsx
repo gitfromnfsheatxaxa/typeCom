@@ -30,7 +30,6 @@ const lightTheme = {
   stats: "#3D5AFE",
   fontFamily: "sans-serif",
 };
-
 const tokyoNightTheme = {
   label: "Tokyo Night",
   background: "#011628",
@@ -41,7 +40,6 @@ const tokyoNightTheme = {
   stats: "#B4D0E9",
   fontFamily: "sans-serif",
 };
-
 const darkTheme = {
   label: "Dark",
   background: "#121212",
@@ -52,7 +50,6 @@ const darkTheme = {
   stats: "#BB86FC",
   fontFamily: "sans-serif",
 };
-
 const cyberTheme = {
   label: "Cyber",
   background: "#272932",
@@ -63,18 +60,6 @@ const cyberTheme = {
   stats: "#00ff9f",
   fontFamily: "Tomorrow",
 };
-
-const steamTheme = {
-  label: "Steam",
-  background: "#6e2f3b",
-  text: "#fdd978",
-  gradient: "linear-gradient(315deg, #80acaa 0%, #fdd978 94%)",
-  title: "#2b211e",
-  textTypeBox: "#605542",
-  stats: "#80acaa",
-  fontFamily: "Tomorrow",
-};
-
 const terminalTheme = {
   label: "Terminal",
   background: "#000 ",
@@ -85,7 +70,6 @@ const terminalTheme = {
   stats: "#39ff14",
   fontFamily: "Tomorrow",
 };
-
 const nintendoTheme = {
   label: "Nintendo",
   background: "#000000",
@@ -96,9 +80,8 @@ const nintendoTheme = {
   stats: "#00c3e3",
   fontFamily: "Tomorrow",
 };
-
-const arakiNobuyoshiTheme = {
-  label: "Araki Nobuyoshi",
+const Pale_Light = {
+  label: "Pale Light",
   background: "#232335",
   text: "#086063",
   gradient: "linear-gradient(90deg, 	#232335 0%, #0a4951 100%)",
@@ -107,32 +90,8 @@ const arakiNobuyoshiTheme = {
   stats: "#1a5426",
   fontFamily: "sans-serif",
 };
-
-const heroTheme = {
-  label: "Hero",
-  background: "#440402",
-  text: "#3A3E47",
-  gradient: "linear-gradient(90deg, 	#70A960 0%, #76C9A5 100%)",
-  title: "#B80100",
-  textTypeBox: "#CD6A5A",
-  stats: "#6A839D",
-  fontFamily: "sans-serif",
-};
-
-const budapestTheme = {
-  label: "Budapest",
-  background:
-      "linear-gradient(to right, #d48fa2,#d48fa2 15%,#74647f 15%, #74647f 85%,#d48fa2 85%);",
-  text: "#b1b7cd",
-  gradient: "linear-gradient(90deg, 	#d48fa2 0%, #74647f 100%)",
-  title: "#647e99",
-  textTypeBox: "#ecca9c",
-  stats: "#be9198",
-  fontFamily: "sans-serif",
-};
-
-const eva01Theme = {
-  label: "EVA-01",
+const PurpleTheme = {
+  label: "Purple",
   background: "#6d45a1",
   text: "#1d1a2f",
   gradient: "linear-gradient(90deg, 	#3f6d4e 0%, #52d053 100%)",
@@ -141,7 +100,6 @@ const eva01Theme = {
   stats: "#1d1a2f",
   fontFamily: "Tomorrow",
 };
-
 const aluminiumTheme = {
   label: "Aluminium",
   background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
@@ -154,8 +112,8 @@ const aluminiumTheme = {
   textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
 
-const pianoTheme = {
-  label: "Piano",
+const GreyTheme = {
+  label: "Grey",
   background: "linear-gradient(to bottom,  #000, #222)",
   text: "#FAF9F6",
   gradient: "linear-gradient(90deg, #000 0%, #222 100%)",
@@ -177,19 +135,6 @@ const coolKidTheme = {
   fontFamily: "Tomorrow",
   textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
-
-const edgeRunnerTheme = {
-  label: "Edgerunner",
-  background: "#FCEE09",
-  text: "#FE00FE",
-  gradient: "linear-gradient(to top,  #59F13F, #FE00FE)",
-  title: "#FE00FE",
-  textTypeBox: "#D1C5C0",
-  stats: "#FE00FE",
-  fontFamily: "Tomorrow",
-  textShadow: "0 0 2vw #E7E7E3",
-};
-
 const tranquiluxeTheme = {
   label: "Tranquiluxe",
   background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
@@ -201,8 +146,7 @@ const tranquiluxeTheme = {
   fontFamily: "Rufina",
   textShadow: "0px 1px 1px #000000",
 };
-
-const lumiflexTheme = {
+const GradientTheme = {
   label: "Lumiflex",
   background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
   text: "#FAF9F6",
@@ -214,17 +158,6 @@ const lumiflexTheme = {
   textShadow: "2px 0px 2px #888B8D",
 };
 
-const opulentoTheme = {
-  label: "Opulento",
-  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
-  text: "#20F0A0",
-  gradient: "linear-gradient(90deg, #888B8D 0%, #FAF9F6 100%)",
-  title: "#EBC49F",
-  textTypeBox: "#B67352",
-  stats: "#20F0A0",
-  fontFamily: "Rufina",
-  textShadow: "4px 4px 2px #000000",
-};
 
 const velustroTheme = {
   label: "Velustro",
@@ -246,22 +179,17 @@ const themesOptions = [
   { value: darkTheme, label: "Dark" },
   { value: tokyoNightTheme, label: "Tokyo Night" },
   { value: aluminiumTheme, label: "Aluminium" },
-  { value: pianoTheme, label: "Piano" },
+  { value: GreyTheme, label: "Grey" },
   { value: terminalTheme, label: "Terminal" },
   { value: nintendoTheme, label: "Nintendo" },
   { value: cyberTheme, label: "Cyber" },
-  { value: edgeRunnerTheme, label: "Edgerunner" },
-  { value: eva01Theme, label: "EVA-01" },
-  { value: steamTheme, label: "Steam" },
-  { value: arakiNobuyoshiTheme, label: "Araki Nobuyoshi" },
-  { value: heroTheme, label: "Hero" },
+  { value: PurpleTheme, label: "Purple" },
+  { value: Pale_Light, label: "Pale Light" },
   { value: coolKidTheme, label: "Cool Kid" },
-  { value: budapestTheme, label: "Budapest" },
   { value: lightTheme, label: "Light" },
-  { value: tranquiluxeTheme, label: "Tranquiluxe" },
-  { value: lumiflexTheme, label: "Lumiflex" },
-  { value: opulentoTheme, label: "Opulento" },
-  { value: velustroTheme, label: "Velustro" },
+  { value: tranquiluxeTheme , label: "Red Cloud" },
+  { value: GradientTheme, label: "Gradient" },
+  { value: velustroTheme, label: "Gum " },
 ];
 
 export {
@@ -270,21 +198,16 @@ export {
   lightTheme,
   darkTheme,
   cyberTheme,
-  eva01Theme,
-  steamTheme,
+  PurpleTheme,
   terminalTheme,
   nintendoTheme,
-  arakiNobuyoshiTheme,
-  heroTheme,
+  Pale_Light,
   coolKidTheme,
-  budapestTheme,
   aluminiumTheme,
-  pianoTheme,
+  GreyTheme,
   defaultTheme,
   themesOptions,
-  edgeRunnerTheme,
   tranquiluxeTheme,
-  lumiflexTheme,
-  opulentoTheme,
+  GradientTheme,
   tokyoNightTheme,
 };

@@ -1,42 +1,65 @@
 import React from "react";
-import {FaKeyboard, FaCrown, FaInfoCircle, FaCog, FaBell, FaUser} from "react-icons/fa"; // Import icons from react-icons
-import styled from "styled-components";
-const Nav = ({isFocusedMode}) => {
-    return (
-        <Div className="nav-container" style={{visibility: isFocusedMode ? 'hidden' : 'visible'}}>
-            <div className="nav-left">
-        <Span  className="logo" style={{color: "#2979ff", fontSize: "24px", fontWeight: "bold"}}>
-          webstertype
-        </Span>
-                <FaKeyboard style={{marginRight: "10px", color: "#f5b400", fontSize: "20px"}}/>
-                <FaCrown style={{marginRight: "15px", color: "#f5b400", fontSize: "20px"}}/>
-                <FaInfoCircle style={{marginRight: "15px", color: "#f5b400", fontSize: "20px"}}/>
-                <FaCog style={{marginRight: "15px", color: "#f5b400", fontSize: "20px"}}/>
-            </div>
-            <DivSign className="nav-right" style={{display: "flex", alignItems: "center"}}>
+import { FaKeyboard, FaCrown, FaInfoCircle, FaCog, FaBell, FaUser } from "react-icons/fa"; // Import icons from react-icons
+import styled, {createGlobalStyle} from "styled-components";
 
-                <FaBell style={{marginRight: "15px", color: "#f5b400", fontSize: "20px"}}/>
-                <FaUser style={{color: "#f5b400", fontSize: "20px"}}/>
-            </DivSign>
-        </Div>
+const Nav = ({ isFocusedMode }) => {
+    return (
+        <NavContainer style={{ visibility: isFocusedMode ? 'hidden' : 'visible' }}>
+            <NavLeft>
+                <Logo>webstertype</Logo>
+                <StyledIcon as={FaKeyboard} />
+                <StyledIcon as={FaCrown} />
+                <StyledIcon as={FaInfoCircle} />
+                <StyledIcon as={FaCog} />
+            </NavLeft>
+            <NavRight>
+                <StyledIcon as={FaBell} />
+                <StyledIcon as={FaUser} />
+            </NavRight>
+        </NavContainer>
     );
 };
-const Div = styled.div`
+
+const NavContainer = styled.div`
     width: 80%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+`;
 
-
-`
-const DivSign = styled.div`
+const NavLeft = styled.div`
     display: flex;
     align-items: center;
-    //gap: 20px;
-`
-const Span = styled.span`
-margin-right: 15px;
-`
+`;
+
+const NavRight = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const Logo = styled.span`
+    color: ${({theme}) => theme.stats};
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+`;
+
+const StyledIcon = styled.div`
+    color: ${({theme}) => theme.stats};
+    font-size: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+    &:hover {
+        border-color: ${({ theme }) => theme.text};
+    }
+`;
+
+const GlobalStyle = createGlobalStyle`
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.text};
+  }
+`;
+
 export default Nav;
