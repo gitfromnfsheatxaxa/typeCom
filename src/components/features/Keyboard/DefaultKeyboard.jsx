@@ -1,8 +1,9 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import IconButton from "../../utils/IconButton.jsx";
+import IconButton from "../../utils/IconButton";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+
 
 const DefaultKeyboard = ({ soundType, soundMode }) => {
   const keyboardRef = useRef();
@@ -11,9 +12,9 @@ const DefaultKeyboard = ({ soundType, soundMode }) => {
   const [incorrectCount, setIncorrectCount] = useState(0);
 
   const accuracy =
-    correctCount + incorrectCount === 0
-      ? 0
-      : Math.floor((correctCount / (correctCount + incorrectCount)) * 100);
+      correctCount + incorrectCount === 0
+          ? 0
+          : Math.floor((correctCount / (correctCount + incorrectCount)) * 100);
   const keys = [..." abcdefghijklmnopqrstuvwxyz "];
   const resetStats = () => {
     setCorrectCount(0);
@@ -27,7 +28,9 @@ const DefaultKeyboard = ({ soundType, soundMode }) => {
     keyboardRef.current && keyboardRef.current.focus();
   };
   const handleKeyDown = (event) => {
-
+    if (soundMode) {
+      play();
+    }
     setInputChar(event.key);
     event.preventDefault();
     return;
@@ -103,66 +106,66 @@ const DefaultKeyboard = ({ soundType, soundMode }) => {
   ];
 
   const row1Elements = lettersRow1.map((letter, index) => (
-    <div className={getClassName(letter.toLowerCase())} key={index} id={letter}>
-      {letter}
-    </div>
+      <div className={getClassName(letter.toLowerCase())} key={index} id={letter}>
+        {letter}
+      </div>
   ));
 
   const lettersRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'"];
 
   const row2Elements = lettersRow2.map((letter, index) => (
-    <div className={getClassName(letter.toLowerCase())} key={index} id={letter}>
-      {letter}
-    </div>
+      <div className={getClassName(letter.toLowerCase())} key={index} id={letter}>
+        {letter}
+      </div>
   ));
 
   const lettersRow3 = ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"];
 
   const row3Elements = lettersRow3.map((letter, index) => (
-    <div className={getClassName(letter.toLowerCase())} key={index} id={letter}>
-      {letter}
-    </div>
+      <div className={getClassName(letter.toLowerCase())} key={index} id={letter}>
+        {letter}
+      </div>
   ));
 
   return (
-    <div>
-      <div className="keyboard">
-        <input
-          className="hidden-input"
-          onBlur={handleInputBlur}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          ref={keyboardRef}
-        ></input>
-        <ul className="row row-1">{row1Elements}</ul>
-        <ul className="row row-2">{row2Elements}</ul>
-        <ul className="row row-3">{row3Elements}</ul>
-        <ul className="row row-4">
-          <div className={getSpaceKeyClassName()} id="SPACE">
-            SPACE
-          </div>
-        </ul>{" "}
+      <div>
+        <div className="keyboard">
+          <input
+              className="hidden-input"
+              onBlur={handleInputBlur}
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+              ref={keyboardRef}
+          ></input>
+          <ul className="row row-1">{row1Elements}</ul>
+          <ul className="row row-2">{row2Elements}</ul>
+          <ul className="row row-3">{row3Elements}</ul>
+          <ul className="row row-4">
+            <div className={getSpaceKeyClassName()} id="SPACE">
+              SPACE
+            </div>
+          </ul>{" "}
+        </div>
+        <div className="keyboard-stats">
+          <Box display="flex" flexDirection="row">
+            <h3>Accuracy: {accuracy} %</h3>
+            <h3>
+              <span className="CorrectKeyDowns">{correctCount}</span>
+              {"  "} {"/"} {"  "}
+              <span className="IncorrectKeyDowns">{incorrectCount}</span>
+            </h3>
+            <IconButton
+                aria-label="restart"
+                size="small"
+                onClick={() => {
+                  resetStats();
+                }}
+            >
+              <RestartAltIcon />
+            </IconButton>
+          </Box>
+        </div>
       </div>
-      <div className="keyboard-stats">
-        <Box display="flex" flexDirection="row">
-          <h3>Accuracy: {accuracy} %</h3>
-          <h3>
-            <span className="CorrectKeyDowns">{correctCount}</span>
-            {"  "} {"/"} {"  "}
-            <span className="IncorrectKeyDowns">{incorrectCount}</span>
-          </h3>
-          <IconButton
-            aria-label="restart"
-            size="small"
-            onClick={() => {
-              resetStats();
-            }}
-          >
-            <RestartAltIcon />
-          </IconButton>
-        </Box>
-      </div>
-    </div>
   );
 };
 

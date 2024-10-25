@@ -238,11 +238,11 @@ const velustroTheme = {
   textShadow: "1px 0px 0px #000000",
 };
 
-const defaultTheme = websterTheme;
+const defaultTheme = WebsterDarkTheme;
 
 const themesOptions = [
-  { value: websterTheme, label: "Webster" },
   { value: WebsterDarkTheme, label: "Dark Webster" },
+  { value: websterTheme, label: "Webster" },
   { value: darkTheme, label: "Dark" },
   { value: tokyoNightTheme, label: "Tokyo Night" },
   { value: aluminiumTheme, label: "Aluminium" },

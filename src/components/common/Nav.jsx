@@ -1,12 +1,11 @@
 import React from "react";
 import {FaKeyboard, FaCrown, FaInfoCircle, FaCog, FaBell, FaUser} from "react-icons/fa"; // Import icons from react-icons
 import styled from "styled-components";
-
 const Nav = ({isFocusedMode}) => {
     return (
         <Div className="nav-container" style={{visibility: isFocusedMode ? 'hidden' : 'visible'}}>
             <div className="nav-left">
-        <Span className="logo" style={{color: "#2979ff", fontSize: "24px", fontWeight: "bold"}}>
+        <Span  className="logo" style={{color: "#2979ff", fontSize: "24px", fontWeight: "bold"}}>
           webstertype
         </Span>
                 <FaKeyboard style={{marginRight: "10px", color: "#f5b400", fontSize: "20px"}}/>

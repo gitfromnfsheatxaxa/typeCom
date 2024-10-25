@@ -13,6 +13,8 @@ import useLocalPersistState from "./hooks/useLocalPersistState.jsx";
 import DynamicBackground from "./components/common/DynamicBackground.jsx";
 import FooterMenu from "./components/common/FooterMenu.jsx";
 import Nav from "./components/common/Nav.jsx";
+import DefaultKeyboard from "./components/features/Keyboard/DefaultKeyboard.jsx";
+import FreeTypingBox from "./components/features/FreeTypingBox.jsx";
 
 function App() {
     const [theme, setTheme] = useState(() => {
@@ -141,6 +143,17 @@ function App() {
                             key="sentence-box"
                         />
                     )}
+                    {isTrainerMode && !isCoffeeMode && !isWordsCardMode && (
+                        <DefaultKeyboard
+
+                        ></DefaultKeyboard>
+                    )}
+                    {isCoffeeMode && !isTrainerMode && !isWordsCardMode && (
+                        <FreeTypingBox
+
+                        />
+                    )}
+
                    <div className="bottomBar">
                        <FooterMenu
 
