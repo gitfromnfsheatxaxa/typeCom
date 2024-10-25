@@ -22,7 +22,6 @@ function App() {
             const upstreamTheme = themesOptions.find(
                 (e) => e.label === localTheme.label
             ).value;
-            // we will do a deep equal here. In case we want to support customized local theme.
             const isDeepEqual = localTheme === upstreamTheme;
             return isDeepEqual ? localTheme : upstreamTheme;
         }

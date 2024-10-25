@@ -4,6 +4,7 @@ import {
 } from "../../../scripts/wordsGenerator.jsx";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import UndoIcon from "@mui/icons-material/Undo";
+import Globe from "@mui/icons-material/Public";
 import IconButton from "../../utils/IconButton.jsx";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,6 +14,7 @@ import CapsLockSnackbar from "../CapsLockSnackbar.jsx";
 import Stats from "./Stats.jsx";
 import {Dialog} from "@mui/material";
 import DialogTitle from "@mui/material/DialogTitle";
+import "../../../App.css"
 import {
     DEFAULT_COUNT_DOWN,
     COUNT_DOWN_90,
@@ -720,7 +722,7 @@ const TypeBox = ({
         return (
             <div className="restart-button" key="restart-button">
                 <Grid container justifyContent="center" alignItems="center">
-                    <Box display="flex" flexDirection="row">
+                    <Box className="box-time" display="flex" flexDirection="row">
                         <IconButton
                             aria-label="redo"
                             color="secondary"
@@ -740,25 +742,7 @@ const TypeBox = ({
                                 <UndoIcon/>
                             </Tooltip>
                         </IconButton>
-                        <IconButton
-                            aria-label="restart"
-                            color="secondary"
-                            size="medium"
-                            onClick={() => {
-                                reset(
-                                    countDownConstant,
-                                    difficulty,
-                                    language,
-                                    numberAddOn,
-                                    symbolAddOn,
-                                    false
-                                );
-                            }}
-                        >
-                            <Tooltip title={RESTART_BUTTON_TOOLTIP_TITLE}>
-                                <RestartAltIcon/>
-                            </Tooltip>
-                        </IconButton>
+
                         {menuEnabled && (
                             <>
                                 <IconButton
@@ -916,7 +900,7 @@ const TypeBox = ({
                             </IconButton>
                             <IconButton>
                                 {" "}
-                                <span className="menu-separator"> | </span>{" "}
+                                {/*<span className="menu-separator"> | </span>{" "}*/}
                             </IconButton>
                             <IconButton
                                 onClick={() => {
@@ -930,11 +914,7 @@ const TypeBox = ({
                                     );
                                 }}
                             >
-                                <Tooltip title={ENGLISH_MODE_TOOLTIP_TITLE}>
-                  <span className={getLanguageButtonClassName(ENGLISH_MODE)}>
-                    eng
-                  </span>
-                                </Tooltip>
+
                             </IconButton>
 
                         </Box>
@@ -963,6 +943,16 @@ const TypeBox = ({
                   </span>
                                 </Tooltip>
                             </IconButton>
+                        </Box>
+                    )}
+                    {menuEnabled && (
+                        <Box  display="flex" flexDirection="row">
+                            <Tooltip style={{alignItems:"center", display:"flex", justifyContent:"space-between", margin:"20px", gap:"0 10px"}} title={ENGLISH_MODE_TOOLTIP_TITLE}>
+                                <Globe/>
+                                <span className={getLanguageButtonClassName(ENGLISH_MODE)}>
+                                  english
+                                </span>
+                            </Tooltip>
                         </Box>
                     )}
                 </Grid>
@@ -1017,7 +1007,10 @@ const TypeBox = ({
         <>
             <div onClick={handleInputFocus}>
                 <CapsLockSnackbar open={capsLocked}></CapsLockSnackbar>
+                {status !== "finished" && renderResetButton()}
+
                 {language === ENGLISH_MODE && (
+
                     <EnglishModeWords
                         currentWords={currentWords}
                         currWordIndex={currWordIndex}
@@ -1030,7 +1023,27 @@ const TypeBox = ({
                         getExtraCharsDisplay={getExtraCharsDisplay}
                     />
                 )}
+                <IconButton className="restart-div"
+                            aria-label="restart"
+                            color="secondary"
+                            size="medium"
+                            onClick={() => {
+                                reset(
+                                    countDownConstant,
+                                    difficulty,
+                                    language,
+                                    numberAddOn,
+                                    symbolAddOn,
+                                    false
+                                );
+                            }}
+                >
+                    <Tooltip title={RESTART_BUTTON_TOOLTIP_TITLE}>
+                        <RestartAltIcon className="restart-center" />
+                    </Tooltip>
+                </IconButton>
                 <div className="stats">
+
                     <Stats
                         status={status}
                         language={language}
@@ -1045,7 +1058,6 @@ const TypeBox = ({
                         wpmKeyStrokes={wpmKeyStrokes}
                         renderResetButton={renderResetButton}
                     ></Stats>
-                    {status !== "finished" && renderResetButton()}
                 </div>
                 <input
                     key="hidden-input"

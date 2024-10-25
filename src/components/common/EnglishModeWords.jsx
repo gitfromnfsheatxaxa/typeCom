@@ -36,12 +36,16 @@ const EnglishModeWords = ({
               ref={wordSpanRefs[globalIndex]}
               style={{
                 opacity: isUltraZenMode ? getWordOpacity(globalIndex) : "1",
-                transition: "500ms",
+                transition: "50ms",
               }}
               className={getWordClassName(globalIndex)}
             >
               {word.split("").map((char, idx) => (
-                <span
+                <span style={
+                  {
+                    transition:"50ms ease-in-out",
+                  }
+                }
                   key={`word${globalIndex}_${idx}`}
                   className={getCharClassName(globalIndex, idx, char, word)}
                 >

@@ -6,5 +6,6 @@ export default styled(IconButton)`
     color: ${({ theme }) => theme.stats};
     background-color: none;
     font-size: 16px;
+      
   }
 `;

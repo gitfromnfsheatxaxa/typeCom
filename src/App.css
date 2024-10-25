@@ -25,3 +25,20 @@
         transform: rotate(360deg);
     }
 }
+
+.box-time {
+
+}
+
+.restart-center {
+    width: 40px;
+}
+
+.restart-div {
+  position: fixed;
+    left: calc(50% - 20px);
+
+}
+.random-text{
+    transition: 1s !important;
+}

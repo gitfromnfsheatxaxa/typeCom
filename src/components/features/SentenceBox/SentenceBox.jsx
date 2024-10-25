@@ -1,7 +1,10 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { sentencesGenerator } from "../../../scripts/sentencesGenerator.jsx";
-import { Stack, Grid, Box, Tooltip, Dialog, DialogTitle } from "@mui/material";
-import IconButton from "../../utils/IconButton.jsx";
+import React from "react";
+import {useState, useMemo, useEffect} from "react";
+import {sentencesGenerator} from "../../../scripts/sentencesGenerator";
+import {Stack} from "@mui/material";
+import {Grid} from "@mui/material";
+import {Box} from "@mui/system";
+import IconButton from "../../utils/IconButton";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import UndoIcon from "@mui/icons-material/Undo";
 import {
@@ -10,68 +13,121 @@ import {
     FIFTEEN_SENTENCES_COUNT,
     RESTART_BUTTON_TOOLTIP_TITLE,
     REDO_BUTTON_TOOLTIP_TITLE,
+} from "../../../constants/Constants";
+import useLocalPersistState from "../../../hooks/useLocalPersistState";
+import {
     ENGLISH_MODE,
     ENGLISH_SENTENCE_MODE_TOOLTIP_TITLE,
-} from "../../../constants/Constants.jsx";
-import useLocalPersistState from "../../../hooks/useLocalPersistState.jsx";
-import SentenceBoxStats from "./SentenceBoxStats.jsx";
+} from "../../../constants/Constants";
+import {Tooltip} from "@mui/material";
+import {Dialog} from "@mui/material";
+import {DialogTitle} from "@mui/material";
+import SentenceBoxStats from "./SentenceBoxStats";
+import useSound from "use-sound";
 
 const SentenceBox = ({
                          sentenceInputRef,
                          handleInputFocus,
                          isFocusedMode,
+                         soundMode,
+                         soundType,
                      }) => {
-    const [sentenceCount, setSentenceCount] = useLocalPersistState(
-        DEFAULT_SENTENCES_COUNT,
-        "sentences-constant"
-    );
-    const [lang, setLang] = useLocalPersistState(ENGLISH_MODE, "sentences-lang");
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [sentencesCountConstant, setSentencesCountConstant] =
+        useLocalPersistState(DEFAULT_SENTENCES_COUNT, "sentences-constant");
+
+    const [language, setLanguage] = useLocalPersistState(
+        ENGLISH_MODE,
+        "sentences-language"
+    );
+
+    const [openRestart, setOpenRestart] = useState(false);
+    const EnterkeyPressReset = (e) => {
+        if (e.keyCode === 13 || e.keyCode === 9) {
+            e.preventDefault();
+            setOpenRestart(false);
+            reset(sentencesCountConstant, language, false);
+        } else if (e.keyCode === 32) {
+            e.preventDefault();
+            setOpenRestart(false);
+            reset(sentencesCountConstant, language, true);
+        } else {
+            e.preventDefault();
+            setOpenRestart(false);
+        }
+    };
+
+    const handleTabKeyOpen = () => {
+        setOpenRestart(true);
+    };
+
+    const getSentencesCountButtonClassName = (buttonSentencesCountConstant) => {
+        if (buttonSentencesCountConstant === sentencesCountConstant) {
+            return "active-button";
+        }
+        return "inactive-button";
+    };
+
+    const getLanguageButtonClassName = (buttonLanguage) => {
+        if (language === buttonLanguage) {
+            return "active-button";
+        }
+        return "inactive-button";
+    };
+
     const [status, setStatus] = useState("waiting");
+
     const [time, setTime] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
+
+    const [timeRunning, setTimeRunning] = useState(false);
 
     useEffect(() => {
         let interval;
-        if (isRunning) {
+        if (timeRunning) {
             interval = setInterval(() => {
-                setTime((prev) => prev + 1);
+                setTime((prevTime) => prevTime + 1);
             }, 1000);
-        } else if (!isRunning) {
+        } else if (!timeRunning) {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [isRunning]);
+    }, [timeRunning]);
 
     const [sentencesDict, setSentencesDict] = useState(() => {
-        return sentencesGenerator(sentenceCount, lang);
+        return sentencesGenerator(sentencesCountConstant, language);
     });
+    const menuEnabled = !isFocusedMode || status === "finished";
 
     const sentences = useMemo(() => {
         return sentencesDict.map((e) => e.val);
     }, [sentencesDict]);
 
-    const [currentIdx, setCurrentIdx] = useState(0);
-    const currentSentence = sentences[currentIdx];
-    const [inputVal, setInputVal] = useState("");
-    const [rawKeys, setRawKeys] = useState(0);
-    const wpm = time < 1 ? 0 : ((rawKeys / time) * 60) / 5;
+    const [currSentenceIndex, setCurrSentenceIndex] = useState(0);
 
-    const reset = (newCount, newLang, isRedo) => {
-        setStatus("waiting");
-        setSentenceCount(newCount);
-        setLang(newLang);
+    const currSentence = sentences[currSentenceIndex];
+
+    const [currInput, setCurrInput] = useState("");
+
+    const [rawKeyStroke, setRawKeyStroke] = useState(0);
+
+    const wpm = time < 1 ? 0 : ((rawKeyStroke / time) * 60) / 5;
+
+    const reset = (newSentencesCountConstant, newLanguage, isRedo) => {
+        setStatus("watiting");
+        setSentencesCountConstant(newSentencesCountConstant);
+        setLanguage(newLanguage);
         if (!isRedo) {
-            setSentencesDict(sentencesGenerator(newCount, newLang));
+            setSentencesDict(
+                sentencesGenerator(newSentencesCountConstant, newLanguage)
+            );
         }
-        setIsRunning(false);
+        setTimeRunning(false);
         setTime(0);
-        setCurrentIdx(0);
-        setInputVal("");
+        setCurrSentenceIndex(0);
+        setCurrInput("");
         sentenceInputRef.current.focus();
         sentenceInputRef.current.value = "";
-        setRawKeys(0);
+        setRawKeyStroke(0);
         setStats({
             correct: 0,
             incorrect: 0,
@@ -81,11 +137,11 @@ const SentenceBox = ({
 
     const start = () => {
         if (status === "finished") {
-            reset(sentenceCount, lang, false);
+            reset(sentencesCountConstant, language, false);
         }
         if (status !== "started") {
             setStatus("started");
-            setIsRunning(true);
+            setTimeRunning(true);
         }
     };
 
@@ -95,40 +151,69 @@ const SentenceBox = ({
         extra: 0,
     });
 
+    const checkAndUpdateStats = (currSentence, currInput) => {
+        const newStats = stats;
+        for (let i = 0; i < currSentence.length; i++) {
+            if (currSentence[i] === currInput[i]) {
+                newStats.correct++;
+            } else {
+                newStats.incorrect++;
+            }
+        }
+        const deltaCharDifference = currInput.length - currSentence.length;
+
+        if (deltaCharDifference > 0) {
+            newStats.extra = deltaCharDifference;
+        }
+
+        setStats(newStats);
+    };
+
     const handleKeyDown = (e) => {
+        if (status !== "finished" && soundMode) {
+            play();
+        }
         const keyCode = e.keyCode;
+        // disable tab key
         if (keyCode === 9) {
             e.preventDefault();
-            setIsOpen(true);
+            handleTabKeyOpen();
             return;
         }
         if (status === "finished") {
             e.preventDefault();
             return;
         }
+
+        // start the game by typing any thing
         if (status !== "started" && status !== "finished") {
             start();
             return;
         }
-        setRawKeys(rawKeys + 1);
+
+        setRawKeyStroke(rawKeyStroke + 1);
+
 
         if (keyCode === 13) {
-            if (inputVal.length >= sentences[currentIdx].length) {
-                if (currentIdx + 1 === sentenceCount) {
+            if (currInput.length >= sentences[currSentenceIndex].length) {
+                checkAndUpdateStats(currSentence, currInput);
+                if (currSentenceIndex + 1 === sentencesCountConstant) {
                     setStatus("finished");
-                    setIsRunning(false);
+                    setTimeRunning(false);
                     return;
                 }
-                setCurrentIdx(currentIdx + 1);
-                setInputVal("");
+                setCurrSentenceIndex(currSentenceIndex + 1);
+                setCurrInput("");
                 sentenceInputRef.current.value = "";
+                return;
             }
+            return;
         }
     };
 
     const getCharClassName = (idx, char) => {
-        if (idx < inputVal.length) {
-            if (inputVal[idx] === char) {
+        if (idx < currInput.length) {
+            if (currInput[idx] === char) {
                 return "correct-sentence-char";
             }
             if (char === " ") {
@@ -139,21 +224,110 @@ const SentenceBox = ({
         return "sentence-char";
     };
 
+    let isOnComposition = false;
+
+    const isChrome = !!window.chrome;
+
+    const handleComposition = (e) => {
+        const {
+            type,
+            currentTarget: {value},
+        } = e;
+        if (type === "compositionend") {
+            // composition finished
+            isOnComposition = false;
+            if (
+                e.currentTarget instanceof HTMLInputElement &&
+                !isOnComposition &&
+                isChrome
+            ) {
+                setCurrInput(value);
+            }
+        } else {
+            isOnComposition = true;
+        }
+    };
+
     const handleChange = (e) => {
         const {
-            currentTarget: { value },
+            currentTarget: {value},
         } = e;
-        if (e.currentTarget instanceof HTMLInputElement) {
-            setInputVal(value);
+        if (e.currentTarget instanceof HTMLInputElement && !isOnComposition) {
+            setCurrInput(value);
         }
     };
 
     return (
         <div onClick={handleInputFocus}>
+            <div className="restart-button" key="restart-button">
+                <Grid container justifyContent="center" alignItems="center">
+                    <Box display="flex" flexDirection="row">
+                        <IconButton
+                            aria-label="redo"
+                            color="secondary"
+                            size="medium"
+                            onClick={() => {
+                                reset(sentencesCountConstant, language, true);
+                            }}
+                        >
+                            <Tooltip title={REDO_BUTTON_TOOLTIP_TITLE}>
+                                <UndoIcon/>
+                            </Tooltip>
+                        </IconButton>
+
+                        {menuEnabled && (
+                            <>
+                                <IconButton
+                                    onClick={() => {
+                                        reset(DEFAULT_SENTENCES_COUNT, language, false);
+                                    }}
+                                >
+                    <span
+                        className={getSentencesCountButtonClassName(
+                            DEFAULT_SENTENCES_COUNT
+                        )}
+                    >
+                      {DEFAULT_SENTENCES_COUNT}
+                    </span>
+                                </IconButton>
+                                <IconButton
+                                    onClick={() => {
+                                        reset(TEN_SENTENCES_COUNT, language, false);
+                                    }}
+                                >
+                    <span
+                        className={getSentencesCountButtonClassName(
+                            TEN_SENTENCES_COUNT
+                        )}
+                    >
+                      {TEN_SENTENCES_COUNT}
+                    </span>
+                                </IconButton>
+                                <IconButton
+                                    onClick={() => {
+                                        reset(FIFTEEN_SENTENCES_COUNT, language, false);
+                                    }}
+                                >
+                    <span
+                        className={getSentencesCountButtonClassName(
+                            FIFTEEN_SENTENCES_COUNT
+                        )}
+                    >
+                      {FIFTEEN_SENTENCES_COUNT}
+                    </span>
+                                </IconButton>
+
+
+                            </>
+                        )}
+                    </Box>
+                </Grid>
+            </div>
+
             <div className="type-box-sentence">
                 <Stack spacing={2}>
                     <div className="sentence-display-field">
-                        {currentSentence.split("").map((char, idx) => (
+                        {currSentence.split("").map((char, idx) => (
                             <span key={"word" + idx} className={getCharClassName(idx, char)}>
                 {char}
               </span>
@@ -166,89 +340,42 @@ const SentenceBox = ({
                         spellCheck="false"
                         className="sentence-input-field"
                         onKeyDown={(e) => handleKeyDown(e)}
+                        onCompositionStart={handleComposition}
+                        onCompositionUpdate={handleComposition}
+                        onCompositionEnd={handleComposition}
                         onChange={handleChange}
                     />
                     {status !== "finished" && (
                         <span className="next-sentence-display">
-              {"->"} {sentences[currentIdx + 1] ?? "Press ↵ to finish."}
+              {"->"} {sentences[currSentenceIndex + 1] ?? "Press ↵ to finish."}
             </span>
                     )}
                 </Stack>
             </div>
+            <IconButton
+
+                aria-label="restart"
+                color="secondary"
+                size="medium"
+                onClick={() => {
+                    reset(sentencesCountConstant, language, false);
+                }}
+            >
+                <Tooltip className="restart-div" title={RESTART_BUTTON_TOOLTIP_TITLE}>
+                    <RestartAltIcon />
+                </Tooltip>
+            </IconButton>
             <div className="stats">
                 <SentenceBoxStats
                     countDown={time}
                     wpm={wpm}
                     status={status}
                     stats={stats}
-                    rawKeyStrokes={rawKeys}
+                    rawKeyStrokes={rawKeyStroke}
                 ></SentenceBoxStats>
 
-                <div className="restart-button" key="restart-button">
-                    <Grid container justifyContent="center" alignItems="center">
-                        <Box display="flex" flexDirection="row">
-                            <IconButton
-                                aria-label="redo"
-                                color="secondary"
-                                size="medium"
-                                onClick={() => {
-                                    reset(sentenceCount, lang, true);
-                                }}
-                            >
-                                <Tooltip title={REDO_BUTTON_TOOLTIP_TITLE}>
-                                    <UndoIcon />
-                                </Tooltip>
-                            </IconButton>
-                            <IconButton
-                                aria-label="restart"
-                                color="secondary"
-                                size="medium"
-                                onClick={() => {
-                                    reset(sentenceCount, lang, false);
-                                }}
-                            >
-                                <Tooltip title={RESTART_BUTTON_TOOLTIP_TITLE}>
-                                    <RestartAltIcon />
-                                </Tooltip>
-                            </IconButton>
-                            <IconButton
-                                onClick={() => {
-                                    reset(DEFAULT_SENTENCES_COUNT, lang, false);
-                                }}
-                            >
-                                <span className="button-count">{DEFAULT_SENTENCES_COUNT}</span>
-                            </IconButton>
-                            <IconButton
-                                onClick={() => {
-                                    reset(TEN_SENTENCES_COUNT, lang, false);
-                                }}
-                            >
-                                <span className="button-count">{TEN_SENTENCES_COUNT}</span>
-                            </IconButton>
-                            <IconButton
-                                onClick={() => {
-                                    reset(FIFTEEN_SENTENCES_COUNT, lang, false);
-                                }}
-                            >
-                                <span className="button-count">{FIFTEEN_SENTENCES_COUNT}</span>
-                            </IconButton>
-                            <IconButton>
-                                {" "}
-                                <span className="menu-separator"> | </span>{" "}
-                            </IconButton>
-                            <IconButton
-                                onClick={() => {
-                                    reset(sentenceCount, ENGLISH_MODE, false);
-                                }}
-                            >
-                                <Tooltip title={ENGLISH_SENTENCE_MODE_TOOLTIP_TITLE}>
-                                    <span className="button-lang">eng</span>
-                                </Tooltip>
-                            </IconButton>
-                        </Box>
-                    </Grid>
-                </div>
             </div>
+
             <Dialog
                 PaperProps={{
                     style: {
@@ -256,7 +383,8 @@ const SentenceBox = ({
                         boxShadow: "none",
                     },
                 }}
-                open={isOpen}
+                open={openRestart}
+                onKeyDown={EnterkeyPressReset}
             >
                 <DialogTitle>
                     <div>

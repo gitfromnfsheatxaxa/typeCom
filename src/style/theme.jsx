@@ -77,7 +77,7 @@ const steamTheme = {
 
 const terminalTheme = {
   label: "Terminal",
-  background: "#0D0208",
+  background: "#000 ",
   text: "#39ff14",
   gradient: "linear-gradient(315deg, #39ff14 0%, #008F11 94%)",
   title: "#008F11",
@@ -238,7 +238,7 @@ const velustroTheme = {
   textShadow: "1px 0px 0px #000000",
 };
 
-const defaultTheme = darkTheme;
+const defaultTheme = websterTheme;
 
 const themesOptions = [
   { value: websterTheme, label: "Webster" },
