@@ -941,7 +941,6 @@ export const GlobalStyles = createGlobalStyle`
 
     .restart-div {
         position: fixed;
-        top: 80%;
         left: calc(50% - 20px);
     }
     .random-text {
