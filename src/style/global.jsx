@@ -127,6 +127,17 @@ export const GlobalStyles = createGlobalStyle`
 
     .bottomBar {
         z-index: 999;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        .footer-bar{
+            padding: 10px;
+            width: 40%;
+            display: flex;
+            justify-content: space-between;
+            margin: auto;
+            align-items: center;
+        }
     }
 
     .stats-overlay {
@@ -264,6 +275,23 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
+    .type-box-chinese {
+        display: block;
+        max-width: 1000px;
+        height: 240px;
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        top: 10%;
+        @media only screen
+        and (min-device-width: 375px)
+        and (max-device-width: 812px)
+        and (-webkit-min-device-pixel-ratio: 3) {
+            top: 200px;
+            width: 60%;
+        }
+    }
 
     .words {
         color: ${({theme}) => theme.textTypeBox};
@@ -495,7 +523,36 @@ export const GlobalStyles = createGlobalStyle`
         background-color: none;
         font-size: 16px;
     }
-    
+
+    .chinese-word {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        padding-right: 2px;
+        border-bottom: 1px solid transparent;
+        border-top: 1px solid transparent;
+    }
+
+    .chinese-word-key {
+        margin: 4px 4px;
+        color: ${({theme}) => theme.textTypeBox};
+        background-color: none;
+        display: flex;
+        justify-content: center;
+        font-size: 20px;
+        scroll-margin: 4px;
+        text-align: center;
+    }
+
+    .error-chinese {
+        color: red;
+    }
+
+    .active-chinese {
+        color: ${({theme}) => theme.stats};
+    }
+
     .dialog {
         background: ${({theme}) => theme.background};
     }
@@ -633,7 +690,7 @@ export const GlobalStyles = createGlobalStyle`
         overflow: hidden;
         margin-left: auto;
         margin-right: auto;
-        position: relative
+        position: relative;
         top: 10%;
         @media only screen
         and (min-device-width: 375px)

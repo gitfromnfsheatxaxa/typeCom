@@ -1,3 +1,25 @@
+const websterTheme = {
+  label: "Webster",
+  background: "#FFFFFF", // White background
+  text: "#0D47A1", // Dark blue text similar to the title
+  gradient: "linear-gradient(90deg, #FFD700 0%, #FFEB3B 100%)", // Yellow gradient for buttons
+  title: "#0D47A1", // Dark blue title color
+  textTypeBox: "#1976D2", // Medium blue for text input area
+  stats: "#FFD700", // Gold/yellow stats color
+  fontFamily: "sans-serif",
+  textShadow: "none",
+};
+const WebsterDarkTheme = {
+  label: "Dark Webster",
+  background: "#000", // White background
+  text: "#0D47A1", // Dark blue text similar to the title
+  gradient: "linear-gradient(90deg, #FFD700 0%, #FFEB3B 100%)", // Yellow gradient for buttons
+  title: "#0D47A1", // Dark blue title color
+  textTypeBox: "#1976D2", // Medium blue for text input area
+  stats: "#FFD700", // Gold/yellow stats color
+  fontFamily: "sans-serif",
+  textShadow: "none",
+};
 const lightTheme = {
   label: "Light",
   background: "#F5F5F5",
@@ -100,7 +122,7 @@ const heroTheme = {
 const budapestTheme = {
   label: "Budapest",
   background:
-    "linear-gradient(to right, #d48fa2,#d48fa2 15%,#74647f 15%, #74647f 85%,#d48fa2 85%);",
+      "linear-gradient(to right, #d48fa2,#d48fa2 15%,#74647f 15%, #74647f 85%,#d48fa2 85%);",
   text: "#b1b7cd",
   gradient: "linear-gradient(90deg, 	#d48fa2 0%, #74647f 100%)",
   title: "#647e99",
@@ -219,6 +241,8 @@ const velustroTheme = {
 const defaultTheme = darkTheme;
 
 const themesOptions = [
+  { value: websterTheme, label: "Webster" },
+  { value: WebsterDarkTheme, label: "Dark Webster" },
   { value: darkTheme, label: "Dark" },
   { value: tokyoNightTheme, label: "Tokyo Night" },
   { value: aluminiumTheme, label: "Aluminium" },
@@ -241,6 +265,8 @@ const themesOptions = [
 ];
 
 export {
+  websterTheme,
+  WebsterDarkTheme,
   lightTheme,
   darkTheme,
   cyberTheme,
