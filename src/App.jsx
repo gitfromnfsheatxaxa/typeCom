@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect} from "react";
 import {ThemeProvider} from "styled-components";
-import {defaultTheme, themesOptions} from "./style/theme.jsx";
 import {GlobalStyles} from "./style/global.jsx";
+import {Routes, Route} from "react-router-dom";
+import {defaultTheme, themesOptions} from "./style/theme.jsx";
 import TypeBox from "./components/features/TypeBox/TypeBox.jsx";
 import SentenceBox from "./components/features/SentenceBox/SentenceBox.jsx";
 import {
@@ -15,6 +16,11 @@ import FooterMenu from "./components/common/FooterMenu.jsx";
 import Nav from "./components/common/Nav.jsx";
 import DefaultKeyboard from "./components/features/Keyboard/DefaultKeyboard.jsx";
 import FreeTypingBox from "./components/features/FreeTypingBox.jsx";
+import RegisterCom from "./components/common/RegisterCom.jsx";
+
+import Profile from "./components/common/profile.jsx";
+import Register from "./components/features/Register/Register.jsx";
+import ProtectedRoute from "./components/common/ProtectedRoute.jsx";
 
 function App() {
     const [theme, setTheme] = useState(() => {
@@ -121,62 +127,57 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <>
-                <DynamicBackground theme={theme}></DynamicBackground>
-                <div className="canvas">
-                    <GlobalStyles/>
-                    <Nav isFocusedMode={isFocusedMode}/>
+            <DynamicBackground theme={theme}/>
+            <div className="canvas">
+                <GlobalStyles/>
+                <Nav isFocusedMode={isFocusedMode}/>
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            {isWordGameMode && (
+                                <TypeBox
+                                    isUltraZenMode={isUltraZenMode}
+                                    textInputRef={textInputRef}
+                                    isFocusedMode={isFocusedMode}
+                                    theme={theme}
+                                />
+                            )}
+                            {isSentenceGameMode && (
+                                <SentenceBox
+                                    sentenceInputRef={sentenceInputRef}
+                                    isFocusedMode={isFocusedMode}
+                                />
+                            )}
+                            {isTrainerMode && !isCoffeeMode && !isWordsCardMode && <DefaultKeyboard/>}
+                            {isCoffeeMode && !isTrainerMode && !isWordsCardMode && <FreeTypingBox/>}
+                            <div className="bottomBar">
+                                <FooterMenu
 
-                    {isWordGameMode && (
-                        <TypeBox
-                            isUltraZenMode={isUltraZenMode}
-                            textInputRef={textInputRef}
-                            isFocusedMode={isFocusedMode}
-                            theme={theme}
-                            key="type-box"
-                        />
-                    )}
-                    {isSentenceGameMode && (
-                        <SentenceBox
-                            sentenceInputRef={sentenceInputRef}
-                            isFocusedMode={isFocusedMode}
-                            key="sentence-box"
-                        />
-                    )}
-                    {isTrainerMode && !isCoffeeMode && !isWordsCardMode && (
-                        <DefaultKeyboard
+                                    isWordGameMode={isWordGameMode}
+                                    themesOptions={themesOptions}
+                                    theme={theme}
+                                    toggleUltraZenMode={toggleUltraZenMode}
+                                    handleThemeChange={handleThemeChange}
+                                    toggleFocusedMode={toggleFocusedMode}
+                                    toggleCoffeeMode={toggleCoffeeMode}
+                                    isCoffeeMode={isCoffeeMode}
+                                    isUltraZenMode={isUltraZenMode}
+                                    isFocusedMode={isFocusedMode}
+                                    gameMode={gameMode}
+                                    handleGameModeChange={handleGameModeChange}
+                                    isTrainerMode={isTrainerMode}
+                                    toggleTrainerMode={toggleTrainerMode}
+                                    isWordsCardMode={isWordsCardMode}
+                                    toggleWordsCardMode={toggleWordsCardMode}
+                                ></FooterMenu>
+                            </div>
+                        </>
+                    }/>
+                    <Route path="/register" element={<RegisterCom/>}/>
+                    <Route path="/login" element={<Register/>}/>
 
-                        ></DefaultKeyboard>
-                    )}
-                    {isCoffeeMode && !isTrainerMode && !isWordsCardMode && (
-                        <FreeTypingBox
-
-                        />
-                    )}
-
-                    <div className="bottomBar">
-                        <FooterMenu
-
-                            isWordGameMode={isWordGameMode}
-                            themesOptions={themesOptions}
-                            theme={theme}
-                            toggleUltraZenMode={toggleUltraZenMode}
-                            handleThemeChange={handleThemeChange}
-                            toggleFocusedMode={toggleFocusedMode}
-                            toggleCoffeeMode={toggleCoffeeMode}
-                            isCoffeeMode={isCoffeeMode}
-                            isUltraZenMode={isUltraZenMode}
-                            isFocusedMode={isFocusedMode}
-                            gameMode={gameMode}
-                            handleGameModeChange={handleGameModeChange}
-                            isTrainerMode={isTrainerMode}
-                            toggleTrainerMode={toggleTrainerMode}
-                            isWordsCardMode={isWordsCardMode}
-                            toggleWordsCardMode={toggleWordsCardMode}
-                        ></FooterMenu>
-                    </div>
-                </div>
-            </>
+                    <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/> </Routes>
+            </div>
         </ThemeProvider>
     );
 }

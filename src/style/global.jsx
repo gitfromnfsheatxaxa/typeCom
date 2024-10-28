@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import {createGlobalStyle} from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
     *,
@@ -112,8 +112,7 @@ export const GlobalStyles = createGlobalStyle`
     h1 {
         color: ${({theme}) => theme.title};
         opacity: 0.9;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin: 10px 0;
     }
 
     h3 {
@@ -140,13 +139,13 @@ export const GlobalStyles = createGlobalStyle`
             margin: auto;
             gap: 0 15px;
             align-items: center;
-            
         }
+
         @media screen and (max-width: 430px) {
             .footer-bar {
                 gap: 0;
                 width: 90%;
-             
+
             }
         }
     }
@@ -199,10 +198,7 @@ export const GlobalStyles = createGlobalStyle`
     .stats {
         display: block;
         width: 80%;
-        margin-top: 50px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 50px auto 20px auto;
         color: ${({theme}) => theme.stats};
         bottom: 10%;
     }
@@ -215,18 +211,12 @@ export const GlobalStyles = createGlobalStyle`
     .wordscard-UI {
         display: block;
         max-width: 1000px;
-        margin-top: 150px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 150px auto 20px auto;
         bottom: 10%;
     }
 
     .wordscard-UI-info {
-        margin-top: 30px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 30px auto 20px auto;
         color: ${({theme}) => theme.textTypeBox};
         bottom: 10%;
     }
@@ -234,10 +224,7 @@ export const GlobalStyles = createGlobalStyle`
     .keyboard-stats {
         display: flex;
         max-width: 1000px;
-        margin-top: 50px;
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 50px auto 20px auto;
         color: ${({theme}) => theme.stats};
         bottom: 10%;
         justify-content: center;
@@ -273,8 +260,7 @@ export const GlobalStyles = createGlobalStyle`
         width: 80%;
         height: 18vh;
         overflow: hidden;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
         position: relative;
         top: 10%;
         @media only screen
@@ -350,24 +336,20 @@ export const GlobalStyles = createGlobalStyle`
         border-left: 1px solid transparent;
         border-right: 1px solid transparent;
         color: ${({theme}) => theme.text};
-
     }
 
     .error-char {
         border-left: 1px solid transparent;
         border-right: 1px solid transparent;
         color: red;
-
     }
 
     .caret-char-left {
         border-left: 1px solid ${({theme}) => theme.stats};
         border-right: 1px solid transparent;
-
     }
 
     .caret-char-left-start {
-
         border-left: 1px solid;
         border-right: 1px solid transparent;
         animation: blinkingCaretLeft 2s infinite;
@@ -394,28 +376,24 @@ export const GlobalStyles = createGlobalStyle`
     .caret-char-right {
         border-right: 1px solid ${({theme}) => theme.stats};
         border-left: 1px solid transparent;
-
     }
 
     .caret-char-right-correct {
         color: ${({theme}) => theme.text};
         border-right: 1px solid ${({theme}) => theme.stats};
         border-left: 1px solid transparent;
-
     }
 
     .caret-char-right-error {
         color: red;
         border-right: 1px solid ${({theme}) => theme.stats};
         border-left: 1px solid transparent;
-
     }
 
     .caret-extra-char-right-error {
         color: red;
         border-right: 1px solid ${({theme}) => theme.stats};
         border-left: 1px solid transparent;
-
     }
 
     .hidden-input {
@@ -431,9 +409,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .restart-button {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 1rem;
+        margin: 0 auto 1rem auto;
         width: 8em;
     }
 
@@ -506,10 +482,7 @@ export const GlobalStyles = createGlobalStyle`
         height: 75%;
         width: 75%;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 8px;
-        margin-bottom: 8px;
+        margin: 8px auto;
         border-radius: 16px;
     }
 
@@ -537,8 +510,7 @@ export const GlobalStyles = createGlobalStyle`
     .novelty-container {
         width: 80%;
         height: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
         position: relative;
         display: block;
     }
@@ -554,8 +526,7 @@ export const GlobalStyles = createGlobalStyle`
         resize: none;
         width: 100%;
         height: 70vh;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
         position: relative;
         outline: none;
         border-radius: 4px;
@@ -637,8 +608,7 @@ export const GlobalStyles = createGlobalStyle`
 
     .wordcard-meaning-display-field {
         font-size: 20px;
-        margin-top: 40px;
-        margin-bottom: 10px;
+        margin: 40px auto 10px auto;
     }
 
     .next-sentence-display {
@@ -654,8 +624,7 @@ export const GlobalStyles = createGlobalStyle`
         width: 80%;
         height: 240px;
         overflow: hidden;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
         position: relative;
         top: 10%;
         @media only screen
@@ -695,6 +664,7 @@ export const GlobalStyles = createGlobalStyle`
     .row-4 {
         padding-left: 0em;
     }
+
     ul {
         display: block;
         list-style-type: disc;
@@ -943,7 +913,58 @@ export const GlobalStyles = createGlobalStyle`
         position: fixed;
         left: calc(50% - 20px);
     }
+
     .random-text {
         transition: 1s !important;
+    }
+
+    .register {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: ${({theme}) => theme.stats};
+
+    }
+
+    .form-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        input {
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: ${({theme}) => theme.textTypeBox};
+            outline: none;
+            
+        }
+
+        input::placeholder {
+            color: ${({theme}) => theme.stats};
+        }
+
+        button {
+            color: ${({theme}) => theme.stats};
+            background-color: ${({theme}) => theme.textTypeBox};
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        button:hover, input:hover {
+            color: ${({theme}) => theme.stats};
+            background-color: ${({theme}) => theme.title};
+        }
+    }
+
+    .label-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        gap: 0;
     }
 `;

@@ -1,20 +1,28 @@
 import React from "react";
-import { FaKeyboard, FaCrown, FaInfoCircle, FaCog, FaBell, FaUser } from "react-icons/fa"; // Import icons from react-icons
+import { FaKeyboard, FaCrown, FaInfoCircle, FaCog, FaUser,FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import styled, {createGlobalStyle} from "styled-components";
-
+import { Link } from "react-router-dom";
 const Nav = ({ isFocusedMode }) => {
     return (
         <NavContainer style={{ visibility: isFocusedMode ? 'hidden' : 'visible' }}>
             <NavLeft>
-                <Logo>webstertype</Logo>
+                <Link className="Link" to="/">
+                    <Logo>webstertype</Logo>
+                </Link>
                 <StyledIcon as={FaKeyboard} />
                 <StyledIcon as={FaCrown} />
                 <StyledIcon as={FaInfoCircle} />
                 <StyledIcon as={FaCog} />
             </NavLeft>
             <NavRight>
-                <StyledIcon as={FaBell} />
-                <StyledIcon as={FaUser} />
+                <Link to="/profile">
+                    <StyledIcon as={FaUser} />
+                </Link>
+                <Link to="/login">
+                    <StyledIcon as={FaSignInAlt} />
+                </Link>
+
+
             </NavRight>
         </NavContainer>
     );
@@ -32,6 +40,9 @@ const NavContainer = styled.div`
 const NavLeft = styled.div`
     display: flex;
     align-items: center;
+    .Link{
+        text-decoration: none;
+    }
 `;
 
 const NavRight = styled.div`
@@ -44,6 +55,7 @@ const Logo = styled.span`
     font-size: 24px;
     font-weight: bold;
     margin-right: 15px;
+    text-decoration: none;
 `;
 
 const StyledIcon = styled.div`
