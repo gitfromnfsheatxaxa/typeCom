@@ -21,6 +21,8 @@ import RegisterCom from "./components/common/RegisterCom.jsx";
 import Profile from "./components/common/profile.jsx";
 import Register from "./components/features/Register/Register.jsx";
 import ProtectedRoute from "./components/common/ProtectedRoute.jsx";
+import {Leaderboard} from "@mui/icons-material";
+import LeaderboardPage from "./components/features/Leaderboard/Leaderboard.jsx";
 
 function App() {
     const [theme, setTheme] = useState(() => {
@@ -175,6 +177,7 @@ function App() {
                     }/>
                     <Route path="/register" element={<RegisterCom/>}/>
                     <Route path="/login" element={<Register/>}/>
+                    <Route path="/leaderboard" element={<LeaderboardPage/>}/>
 
                     <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/> </Routes>
             </div>

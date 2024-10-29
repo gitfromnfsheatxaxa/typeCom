@@ -43,55 +43,41 @@ import {
 } from "../../../constants/Constants.jsx";
 import EnglishModeWords from "../../common/EnglishModeWords.jsx";
 
-const TypeBox = ({
-                     textInputRef,
-                     isFocusedMode,
-                     isUltraZenMode,
-                     handleInputFocus,
-                     theme,
-                 }) => {
+const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus, theme,}) => {
     const [incorrectCharsCount, setIncorrectCharsCount] = useState(0);
 
-    // local persist timer
     const [countDownConstant, setCountDownConstant] = useLocalPersistState(
         DEFAULT_COUNT_DOWN,
         "timer-constant"
     );
 
-    // local persist pacing style
     const [pacingStyle, setPacingStyle] = useLocalPersistState(
         PACING_PULSE,
         "pacing-style"
     );
 
-    // local persist difficulty
     const [difficulty, setDifficulty] = useLocalPersistState(
         DEFAULT_DIFFICULTY,
         "difficulty"
     );
 
-    // local persist difficulty
     const [language, setLanguage] = useLocalPersistState(
         ENGLISH_MODE,
         "language"
     );
 
-    // local persist words add on for number
     const [numberAddOn, setNumberAddOn] = useLocalPersistState(
         false,
         NUMBER_ADDON_KEY
     );
 
-    // local persist words add on for symbol
     const [symbolAddOn, setSymbolAddOn] = useLocalPersistState(
         false,
         SYMBOL_ADDON_KEY
     );
 
-    // Caps Lock
     const [capsLocked, setCapsLocked] = useState(false);
 
-    // tab-enter restart dialog
     const [openRestart, setOpenRestart] = useState(false);
 
     const EnterkeyPressReset = (e) => {
@@ -128,7 +114,6 @@ const TypeBox = ({
         setOpenRestart(true);
     };
 
-    // set up words state
     const [wordsDict, setWordsDict] = useState(() => {
         if (language === ENGLISH_MODE) {
             return wordsGenerator(
@@ -158,36 +143,27 @@ const TypeBox = ({
         [words]
     );
 
-    // set up timer state
     const [countDown, setCountDown] = useState(countDownConstant);
     const [intervalId, setIntervalId] = useState(null);
 
-    // set up game loop status state
     const [status, setStatus] = useState("waiting");
 
-    // enable menu
     const menuEnabled = !isFocusedMode || status === "finished";
 
-    // set up hidden input input val state
     const [currInput, setCurrInput] = useState("");
-    // set up world advancing index
     const [currWordIndex, setCurrWordIndex] = useState(0);
-    // set up char advancing index
     const [currCharIndex, setCurrCharIndex] = useState(-1);
     const [prevInput, setPrevInput] = useState("");
 
-    // set up words examine history
     const [wordsCorrect, setWordsCorrect] = useState(new Set());
     const [wordsInCorrect, setWordsInCorrect] = useState(new Set());
     const [inputWordsHistory, setInputWordsHistory] = useState({});
 
-    // setup stats
     const [rawKeyStrokes, setRawKeyStrokes] = useState(0);
     const [wpmKeyStrokes, setWpmKeyStrokes] = useState(0);
     const [wpm, setWpm] = useState(0);
     const [statsCharCount, setStatsCharCount] = useState([]);
 
-    // set up char examine hisotry
     const [history, setHistory] = useState({});
     const keyString = currWordIndex + "." + currCharIndex;
     const [currChar, setCurrChar] = useState("");
@@ -269,7 +245,6 @@ const TypeBox = ({
         setWordsCorrect(new Set());
         setWordsInCorrect(new Set());
         textInputRef.current.focus();
-        // console.log("fully reset waiting for next inputs");
         wordSpanRefs[0].current.scrollIntoView();
     };
 
@@ -366,13 +341,11 @@ const TypeBox = ({
     const wpmWorkerRef = useRef(null);
 
     useEffect(() => {
-        // Initialize worker
         wpmWorkerRef.current = new Worker(
             new URL("../../../worker/calculateWpmWorker", import.meta.url)
         );
 
         return () => {
-            // Cleanup worker on component unmount
             if (wpmWorkerRef.current) {
                 wpmWorkerRef.current.terminate();
             }
@@ -406,7 +379,6 @@ const TypeBox = ({
         const keyCode = e.keyCode;
         setCapsLocked(e.getModifierState("CapsLock"));
 
-        // keydown count for KPM calculations to all types of operations
         if (status === "started") {
             setRawKeyStrokes(rawKeyStrokes + 1);
             if (keyCode >= 65 && keyCode <= 90) {
@@ -414,19 +386,16 @@ const TypeBox = ({
             }
         }
 
-        // disable Caps Lock key
         if (keyCode === 20) {
             e.preventDefault();
             return;
         }
 
-        // disable shift alt ctrl
         if (keyCode >= 16 && keyCode <= 18) {
             e.preventDefault();
             return;
         }
 
-        // disable tab key
         if (keyCode === 9) {
             e.preventDefault();
             handleTabKeyOpen();
@@ -438,21 +407,16 @@ const TypeBox = ({
             setPrevInput("");
             return;
         }
-
-        // Update stats when typing unless there is no effective WPM
         if (wpmKeyStrokes !== 0) {
             calculateWpm(wpmKeyStrokes, countDownConstant, countDown);
         }
 
-        // start the game by typing anything
         if (status !== "started" && status !== "finished") {
             start();
         }
 
-        // space bar
         if (keyCode === 32) {
             const prevCorrectness = checkPrev();
-            // advance to next regardless prev correct/not
             if (prevCorrectness === true || prevCorrectness === false) {
                 if (
                     words[currWordIndex].split("").length > currInput.split("").length
@@ -460,30 +424,19 @@ const TypeBox = ({
                     setIncorrectCharsCount((prev) => prev + 1);
                 }
 
-                // reset currInput
                 setCurrInput("");
-                // advance to next
                 setCurrWordIndex(currWordIndex + 1);
                 setCurrCharIndex(-1);
                 return;
             } else {
-                // but don't allow entire word skip
-                // console.log("entire word skip not allowed");
+
                 return;
             }
-
-            // backspace
         } else if (keyCode === 8) {
-            // delete the mapping match records
             delete history[keyString];
-
-            // avoid over delete
             if (currCharIndex < 0) {
-                // only allow delete prev word, rewind to previous
                 if (wordsInCorrect.has(currWordIndex - 1)) {
-                    // console.log("detected prev incorrect, rewinding to previous");
                     const prevInputWord = inputWordsHistory[currWordIndex - 1];
-                    // console.log(prevInputWord + " ")
                     setCurrInput(prevInputWord + " ");
                     setCurrCharIndex(prevInputWord.length - 1);
                     setCurrWordIndex(currWordIndex - 1);
@@ -498,12 +451,7 @@ const TypeBox = ({
             setCurrCharIndex(currCharIndex + 1);
             setCurrChar(key);
             return;
-            // if (keyCode >= 65 && keyCode <= 90) {
-            //   setCurrCharIndex(currCharIndex + 1);
-            //   setCurrChar(key);
-            // } else {
-            //   return;
-            // }
+
         }
     };
 
@@ -547,26 +495,21 @@ const TypeBox = ({
             return null;
         }
         if (isCorrect) {
-            // console.log("detected match");
             wordsCorrect.add(currWordIndex);
             wordsInCorrect.delete(currWordIndex);
             let inputWordsHistoryUpdate = {...inputWordsHistory};
             inputWordsHistoryUpdate[currWordIndex] = currInputWithoutSpaces;
             setInputWordsHistory(inputWordsHistoryUpdate);
-            // reset prevInput to empty (will not go back)
             setPrevInput("");
 
-            // here count the space as effective wpm.
             setWpmKeyStrokes(wpmKeyStrokes + 1);
             return true;
         } else {
-            // console.log("detected unmatch");
             wordsInCorrect.add(currWordIndex);
             wordsCorrect.delete(currWordIndex);
             let inputWordsHistoryUpdate = {...inputWordsHistory};
             inputWordsHistoryUpdate[currWordIndex] = currInputWithoutSpaces;
             setInputWordsHistory(inputWordsHistoryUpdate);
-            // append currInput to prevInput
             setPrevInput(prevInput + " " + currInputWithoutSpaces);
             return false;
         }
@@ -973,12 +916,10 @@ const TypeBox = ({
     const [startIndex, setStartIndex] = useState(0);
     const [visibleWordsCount, setVisibleWordsCount] = useState(baseChunkSize);
 
-    // Reset startIndex when status changes
     useEffect(() => {
         setStartIndex(0);
     }, [status]);
 
-    // Adjust visible words based on current word index
     useEffect(() => {
         const endIndex = startIndex + visibleWordsCount;
 
@@ -1001,7 +942,6 @@ const TypeBox = ({
         }
     }, [currWordIndex, startIndex, words.length, visibleWordsCount]);
 
-    // Calculate the end index and slice the words
     const endIndex = useMemo(
         () => Math.min(startIndex + visibleWordsCount, words.length),
         [startIndex, visibleWordsCount, words.length]
@@ -1110,5 +1050,4 @@ const TypeBox = ({
         </>
     );
 };
-
 export default TypeBox;

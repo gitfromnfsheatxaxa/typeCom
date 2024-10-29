@@ -9,10 +9,9 @@ const Nav = ({ isFocusedMode }) => {
                 <Link className="Link" to="/">
                     <Logo>webstertype</Logo>
                 </Link>
-                <StyledIcon as={FaKeyboard} />
-                <StyledIcon as={FaCrown} />
-                <StyledIcon as={FaInfoCircle} />
-                <StyledIcon as={FaCog} />
+                <Link className="Link" to="/leaderboard">
+                    <StyledIcon as={FaCrown} />
+                </Link>
             </NavLeft>
             <NavRight>
                 <Link to="/profile">
@@ -40,8 +39,11 @@ const NavContainer = styled.div`
 const NavLeft = styled.div`
     display: flex;
     align-items: center;
+    
     .Link{
         text-decoration: none;
+        display: flex;
+        align-items: center;
     }
 `;
 

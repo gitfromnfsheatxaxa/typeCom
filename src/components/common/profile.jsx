@@ -33,10 +33,10 @@ const Profile = () => {
                     <p><strong>Nickname:</strong> {userData.nickname}</p>
                     <p><strong>Created At:</strong> {new Date(userData.created).toLocaleString()}</p>
 
-                        <div>
-                            <p>Logout</p>
-                            <Logout/>
-                        </div>
+                    <div>
+                        <p>Logout</p>
+                        <Logout/>
+                    </div>
                 </div>
             ) : (
                 <p>Loading user data...</p>
