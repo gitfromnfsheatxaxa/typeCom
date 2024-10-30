@@ -206,6 +206,7 @@ export const GlobalStyles = createGlobalStyle`
     .stats-footer {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     .wordscard-UI {

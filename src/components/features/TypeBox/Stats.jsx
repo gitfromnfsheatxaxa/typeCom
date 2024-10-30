@@ -21,9 +21,9 @@ const Stats = ({
                    countDownConstant,
                    statsCharCount,
                    language,
+                   renderResetButton,
                    rawKeyStrokes,
                    theme,
-                   renderResetButton,
                    setIncorrectCharsCount,
                    incorrectCharsCount,
                }) => {
@@ -209,7 +209,7 @@ const Stats = ({
     );
 
     const renderWpm = () => {
-        const totalWpm = data.map((e) => e.wpm).reduce((a, b) => a + b, 0);
+        const totalWpm = data.map((e) => e.rawWpm).reduce((a, b) => a + b, 0);
         const averageWpm = data.length > 1 ? totalWpm / (data.length - 1) : 0;
         return (
             <div>
@@ -249,8 +249,8 @@ const Stats = ({
 
         const storedDifficulty = localStorage.getItem('difficulty');
         console.log(storedDifficulty)
-        const mode = (storedDifficulty == "hard" || storedDifficulty == "normal") ? storedDifficulty : 'normal';
-        // const mode = "hard"
+        // const mode = (storedDifficulty == "hard" || storedDifficulty == "normal") ? storedDifficulty : 'normal';
+        const mode = "hard"
         const data = {
             wpm,
             mode,
@@ -282,11 +282,11 @@ const Stats = ({
 
 
     return (
-        <>
+        <div>
             {status !== "finished" && (
                 <>
                     <h3>{countDown} s</h3>
-                    <h3>WPM: {roundedWpm}</h3>
+                    {/*<h3>WPM: {roundedWpm}</h3>*/}
                 </>
             )}
             {status === "finished" && (
@@ -302,14 +302,16 @@ const Stats = ({
                         <section className="stats-footer">
                             {renderLanguage()}
                             {renderRawKpm()}
+                            Press TAB to reset
                             {renderCharStats()}
                             {renderTime()}
                         </section>
-                        <section>{renderResetButton()}</section>
+                        {/*<section>{renderResetButton()}</section>*/}
+
                     </section>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
