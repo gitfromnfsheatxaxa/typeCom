@@ -209,7 +209,7 @@ const Stats = ({
     );
 
     const renderWpm = () => {
-        const totalWpm = data.map((e) => e.rawWpm).reduce((a, b) => a + b, 0);
+        const totalWpm = data.map((e) => e.wpm).reduce((a, b) => a + b, 0);
         const averageWpm = data.length > 1 ? totalWpm / (data.length - 1) : 0;
         return (
             <div>
@@ -249,8 +249,8 @@ const Stats = ({
 
         const storedDifficulty = localStorage.getItem('difficulty');
         console.log(storedDifficulty)
-        // const mode = (storedDifficulty == "hard" || storedDifficulty == "normal") ? storedDifficulty : 'normal';
-        const mode = "hard"
+        const mode = (storedDifficulty == "hard" || storedDifficulty == "normal") ? storedDifficulty : 'normal';
+        // const mode = "normal"
         const data = {
             wpm,
             mode,
@@ -275,10 +275,11 @@ const Stats = ({
     }, [status, roundedWpm]); // Depend on status and roundedWpm
     useEffect(() => {
         if (status === "finished") {
-            const mode = "hard"; // Set this based on your game logic, if it's hard or normal
-            submitHighestWPM(roundedWpm, mode); // Call it when typing is finished
+            const storedDifficulty = localStorage.getItem('difficulty');
+            const mode = (storedDifficulty == "hard" || storedDifficulty == "normal") ? storedDifficulty : 'normal';
+            submitHighestWPM(roundedWpm, mode);
         }
-    }, [status, roundedWpm]); // Dependencies to trigger this effect
+    }, [status, roundedWpm]);
 
 
     return (

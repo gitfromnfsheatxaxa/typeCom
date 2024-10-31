@@ -683,7 +683,9 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                 }}
                             >
                                 <Tooltip title={REDO_BUTTON_TOOLTIP_TITLE}>
-                                    <UndoIcon/>
+                                    <>
+                                        <UndoIcon/>
+                                    </>
                                 </Tooltip>
                             </IconButton>
 
@@ -770,16 +772,14 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                         );
                                     }}
                                 >
-                                    <Tooltip
-                                        title={
-                                            ENGLISH_MODE
-                                        }
-                                    >
-                  <span
-                      className={getDifficultyButtonClassName(DEFAULT_DIFFICULTY)}
-                  >
-                    {DEFAULT_DIFFICULTY}
-                  </span>
+                                    <Tooltip title={ENGLISH_MODE}>
+                                        <>
+                                        <span
+                                            className={getDifficultyButtonClassName(DEFAULT_DIFFICULTY)}
+                                        >
+                                        {DEFAULT_DIFFICULTY}
+                                      </span>
+                                        </>
                                     </Tooltip>
                                 </IconButton>
                                 <IconButton
@@ -794,16 +794,12 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                         );
                                     }}
                                 >
-                                    <Tooltip
-                                        title={
-                                            ENGLISH_MODE
-                                        }
-                                    >
-                  <span
-                      className={getDifficultyButtonClassName(HARD_DIFFICULTY)}
-                  >
-                    {HARD_DIFFICULTY}
-                  </span>
+                                    <Tooltip title={ENGLISH_MODE}>
+                                        <>
+                                             <span className={getDifficultyButtonClassName(HARD_DIFFICULTY)}>
+                                                {HARD_DIFFICULTY}
+                                              </span>
+                                        </>
                                     </Tooltip>
                                 </IconButton>
                                 <IconButton
@@ -819,9 +815,11 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                     }}
                                 >
                                     <Tooltip title={NUMBER_ADDON_TOOLTIP_TITLE}>
-                  <span className={getAddOnButtonClassName(numberAddOn)}>
-                    {NUMBER_ADDON}
-                  </span>
+                                        <>
+                                            <span className={getAddOnButtonClassName(numberAddOn)}>
+                                                {NUMBER_ADDON}
+                                             </span>
+                                        </>
                                     </Tooltip>
                                 </IconButton>
                                 <IconButton
@@ -837,30 +835,13 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                     }}
                                 >
                                     <Tooltip title={SYMBOL_ADDON_TOOLTIP_TITLE}>
-                  <span className={getAddOnButtonClassName(symbolAddOn)}>
-                    {SYMBOL_ADDON}
-                  </span>
+                                        <>
+                                            <span className={getAddOnButtonClassName(symbolAddOn)}>
+                                        {SYMBOL_ADDON}
+                                      </span>
+                                        </>
                                     </Tooltip>
                                 </IconButton>
-                                {/*<IconButton>*/}
-                                {/*    {" "}*/}
-                                {/*    /!*<span className="menu-separator"> | </span>{" "}*!/*/}
-                                {/*</IconButton>*/}
-                                {/*<IconButton*/}
-                                {/*    onClick={() => {*/}
-                                {/*        reset(*/}
-                                {/*            countDownConstant,*/}
-                                {/*            difficulty,*/}
-                                {/*            ENGLISH_MODE,*/}
-                                {/*            numberAddOn,*/}
-                                {/*            symbolAddOn,*/}
-                                {/*            false*/}
-                                {/*        );*/}
-                                {/*    }}*/}
-                                {/*>*/}
-
-                                {/*</IconButton>*/}
-
                             </Box>
                         )}
                     </div>
@@ -872,9 +853,11 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                 }}
                             >
                                 <Tooltip title={PACING_PULSE_TOOLTIP}>
-                  <span className={getPacingStyleButtonClassName(PACING_PULSE)}>
-                    {PACING_PULSE}
-                  </span>
+                                    <>
+                                        <span className={getPacingStyleButtonClassName(PACING_PULSE)}>
+                                    {PACING_PULSE}
+                                  </span>
+                                    </>
                                 </Tooltip>
                             </IconButton>
                             <IconButton
@@ -883,9 +866,11 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                 }}
                             >
                                 <Tooltip title={PACING_CARET_TOOLTIP}>
-                  <span className={getPacingStyleButtonClassName(PACING_CARET)}>
-                    {PACING_CARET}
-                  </span>
+                                    <>
+                                         <span className={getPacingStyleButtonClassName(PACING_CARET)}>
+                                             {PACING_CARET}
+                                        </span>
+                                    </>
                                 </Tooltip>
                             </IconButton>
                         </Box>
@@ -900,10 +885,12 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                 margin: "20px",
                                 gap: "0 10px"
                             }} title={ENGLISH_MODE_TOOLTIP_TITLE}>
-                                <Globe/>
-                                <span className={getLanguageButtonClassName(ENGLISH_MODE)}>
+                                <>
+                                    <Globe/>
+                                    <span className={getLanguageButtonClassName(ENGLISH_MODE)}>
                                   english
                                 </span>
+                                </>
                             </Tooltip>
                         </Box>
                     )}
@@ -988,7 +975,9 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                             }}
                 >
                     <Tooltip title={RESTART_BUTTON_TOOLTIP_TITLE}>
-                        <RestartAltIcon className="restart-center"/>
+                        <>
+                            <RestartAltIcon className="restart-center"/>
+                        </>
                     </Tooltip>
                 </IconButton>
                 <div className="stats">

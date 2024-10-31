@@ -54,7 +54,6 @@ export const GlobalStyles = createGlobalStyle`
         padding: 40px; /* Increased padding */
         border-radius: 8px;
         position: relative; /* To position the close button */
-        width: 80%; /* Increased width */
         max-width: 600px; /* Max width to keep it from getting too large */
         height: auto; /* Allow height to grow with content */
     }
@@ -162,8 +161,7 @@ export const GlobalStyles = createGlobalStyle`
         position: absolute;
         background: transparent;
         top: 50%;
-        width: 100%;
-        max-width: 1000px;
+        width: 80%;
         left: 50%;
         transform: translate(-50%, -50%);
         display: flex;
@@ -259,7 +257,7 @@ export const GlobalStyles = createGlobalStyle`
     .type-box {
         display: block;
         width: 80%;
-        height: 18vh;
+        height: 140px;
         overflow: hidden;
         margin: 0 auto;
         position: relative;
@@ -916,7 +914,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .random-text {
-        transition: 1s !important;
+        transition: 2s !important;
     }
 
     .register {
@@ -968,4 +966,136 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: start;
         gap: 0;
     }
+    /* Profile container styles */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: ${({ theme }) => theme.background}; /* Use theme background */
+    color: ${({ theme }) => theme.textTypeBox}; /* Use theme text color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+    gap: 20px; /* Space between elements */
+}
+
+/* Profile heading */
+.profile-heading {
+    font-size: 24px;
+    margin: 0; /* Remove margin for uniformity */
+}
+
+/* User data section */
+.user-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the content */
+}
+
+/* Profile image */
+.profile-image {
+    width: 100px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    border-radius: 50%; /* Makes the image circular */
+    margin-bottom: 20px; /* Spacing below the image */
+    object-fit: cover;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    text-align: center; /* Center the error message */
+}
+
+/* Upload section styles */
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Full width */
+    gap: 10px; /* Space between input fields */
+}
+
+/* Flex container for input and button */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Full width */
+}
+
+/* File input and URL input styles */
+.file-input, .url-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid ${({ theme }) => theme.textTypeBox}; /* Border color using theme */
+    border-radius: 5px;
+    width: 100%; /* Full width */
+    background: ${({ theme }) => theme.background}; /* Input background */
+    color: ${({ theme }) => theme.textTypeBox}; /* Input text color */
+    margin-bottom: 10px; /* Spacing below inputs */
+}
+
+/* Submit URL button styles */
+.submit-url-button {
+    padding: 10px; /* Button padding */
+    font-size: 16px; /* Button font size */
+    background-color: ${({ theme }) => theme.textTypeBox}; /* Button background */
+    color: ${({ theme }) => theme.background}; /* Button text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    width: 100%; /* Full width */
+}
+
+.submit-url-button:hover {
+    background-color: #555; /* Darker shade on hover */
+}
+
+/* Download button styles */
+.download-button {
+    padding: 10px 20px; /* Bigger padding for a larger button */
+    font-size: 16px; /* Increase font size */
+    background-color: ${({ theme }) => theme.textTypeBox}; /* Button background */
+    color: ${({ theme }) => theme.background}; /* Button text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    width: 100%; /* Full width */
+}
+
+/* Button hover effect */
+.download-button:hover {
+    background-color: #555; /* Darker shade for hover effect */
+}
+
+/* Logout section */
+.logout-section {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid ${({ theme }) => theme.textTypeBox};
+    width: 100%;
+    text-align: center; /* Center align the logout */
+}
+
+/* Flex styling for logout */
+.logout-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: ${({ theme }) => theme.textTypeBox};
+    color: ${({ theme }) => theme.background};
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Full width */
+}
+
+.logout-button:hover {
+    background-color: #555; /* Darker shade on hover */
+}
+
 `;
