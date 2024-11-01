@@ -1,93 +1,96 @@
 // Profile.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logout from './LogOutCom.jsx'; // Import the Logout component
+import axios from 'axios';
+import Logout from './LogOutCom.jsx';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
-    const [imageUrl, setImageUrl] = useState(''); // State to hold image URL
+    const [imageUrl, setImageUrl] = useState('');
+    const [personalRecords, setPersonalRecords] = useState({
+        normal: { wpm: 0, accuracy: 0 },
+        hard: { wpm: 0, accuracy: 0 }
+    });
     const navigate = useNavigate();
 
     useEffect(() => {
-        const nickname = localStorage.getItem('nickname');
-        if (!nickname) {
-            navigate('/login'); // Redirect to login if nickname is not found
+        const username = localStorage.getItem('username');
+        if (!username) {
+            navigate('/login');
             return;
         }
 
         // Mock user data for demonstration purposes
         const mockUserData = {
-            nickname: nickname,
+            username: username,
             created: new Date().toISOString(),
-            updated: new Date().toISOString(),
-            imageUrl: 'path/to/default-profile-image.png', // Default image path
+            imageUrl: 'path/to/default-profile-image.png',
         };
 
-        setUserData(mockUserData); // Set mock user data
-        setImageUrl(mockUserData.imageUrl); // Set default image URL
+        setUserData(mockUserData);
+        setImageUrl(mockUserData.imageUrl);
+
+        // Fetch personal records for "Normal" and "Hard" mode
+        fetchPersonalRecords(username);
     }, [navigate]);
+
+    const fetchPersonalRecords = async (username) => {
+        try {
+            const response = await axios.get(`https://ulugbek5800.pythonanywhere.com/api/user-records?username=${username}`);
+            setPersonalRecords(response.data);
+        } catch (err) {
+            console.error("Failed to load personal records:", err);
+        }
+    };
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImageUrl(reader.result); // Update image URL with the uploaded image
+                setImageUrl(reader.result);
             };
-            reader.readAsDataURL(file); // Read the file as a data URL
+            reader.readAsDataURL(file);
         }
-    };
-
-    const handleUrlSubmit = (e) => {
-        e.preventDefault();
-        const url = e.target.url.value;
-        setImageUrl(url); // Set the image URL from the text input
-        e.target.url.value = ''; // Clear the input after submission
     };
 
     const handleImageDownload = () => {
         const link = document.createElement('a');
-        link.href = imageUrl; // Use the user's image URL
-        link.download = `${userData.nickname}-profile.png`; // Name the downloaded file
+        link.href = imageUrl;
+        link.download = `${userData.username}-profile.png`;
         link.click();
     };
 
     return (
         <div className="profile-container">
             <h2 className="profile-heading">User Profile</h2>
-            {error && <p className="error-message">{error}</p>}
             {userData ? (
                 <div className="user-data">
-                    <img
-                        src={imageUrl}
-                        alt={`${userData.nickname}'s profile`}
-                        className="profile-image"
-                    />
-                    <p><strong>Nickname:</strong> {userData.nickname}</p>
-                    <p><strong>Created At:</strong> {new Date(userData.created).toLocaleString()}</p>
-
-                    <div className="upload-section">
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageUpload}
-                            className="file-input"
-                        />
-                        <form onSubmit={handleUrlSubmit}>
-                            <input
-                                type="text"
-                                name="url"
-                                placeholder="Paste image URL here"
-                                className="url-input"
-                            />
-                            <button type="submit" className="submit-url-button">Submit URL</button>
-                        </form>
+                    <div className="profile-image-container">
+                        <img src={imageUrl} alt="Profile" className="profile-image" />
+                        <p className="username">{userData.username}</p>
+                        <p className="joined-date">Joined {new Date(userData.created).toLocaleDateString()}</p>
                     </div>
 
-                    <button className="download-button" onClick={handleImageDownload}>
-                        Download Profile Image
-                    </button>
+                    <div className="upload-section">
+                        <input type="file" accept="image/*" onChange={handleImageUpload} className="file-input" />
+                        <button onClick={handleImageDownload} className="download-button">Download Profile Image</button>
+                    </div>
+
+                    <h3 className="record-heading">Highest <span className="wpm">WPM</span> <span className="accuracy">Accuracy</span></h3>
+                    <div className="records">
+                        <div className="record normal">
+                            <h4>Normal</h4>
+                            <p>{personalRecords.normal.wpm}</p>
+                            <p>{personalRecords.normal.accuracy}%</p>
+                        </div>
+                        <div className="record hard">
+                            <h4>Hard</h4>
+                            <p>{personalRecords.hard.wpm}</p>
+                            <p>{personalRecords.hard.accuracy}%</p>
+                        </div>
+                    </div>
+
                     <div className="logout-section">
                         <Logout />
                     </div>

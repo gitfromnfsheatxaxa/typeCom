@@ -1,10 +1,9 @@
-// LeaderboardPage.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const LeaderboardPage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
-    const [mode, setMode] = useState("normal"); // Set default mode to 'normal'
+    const [mode, setMode] = useState("normal");
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -20,34 +19,28 @@ const LeaderboardPage = () => {
             console.error(err);
         }
     };
-    console.log(leaderboard)
-    return (
-        <div>
-            <h2>Leaderboard - {mode === "normal" ? "Normal Mode" : "Hard Mode"}</h2>
 
-            <div>
-                <button onClick={() => setMode("normal")}>Normal Mode</button>
-                <button onClick={() => setMode("hard")}>Hard Mode</button>
+    return (
+        <div className="leaderboard-container">
+            <h2 className="leaderboard-title">Leaderboard - {mode === "normal" ? "Normal Mode" : "Hard Mode"}</h2>
+
+            <div className="mode-buttons">
+                <button onClick={() => setMode("normal")} className={mode === "normal" ? "active" : ""}>Normal Mode</button>
+                <button onClick={() => setMode("hard")} className={mode === "hard" ? "active" : ""}>Hard Mode</button>
             </div>
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
 
-            <table border="1" cellPadding="10" style={{ width: "100%", marginTop: "20px" }}>
-                <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Highest WPM</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div className="table-container">
+                <div className="table-header">Username</div>
+                <div className="table-header">Highest WPM</div>
                 {leaderboard.map((user, index) => (
-                    <tr key={index}>
-                        <td>{user.username}</td>
-                        <td>{user.highest_wpm}</td>
-                    </tr>
+                    <div className="table-row" key={index}>
+                        <div className="table-cell table-user">  {user.username}</div>
+                        <div className="table-cell">{user.highest_wpm}</div>
+                    </div>
                 ))}
-                </tbody>
-            </table>
+            </div>
         </div>
     );
 };

@@ -18,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
         color: ${({theme}) => theme.text};
         padding: 0;
         margin: 0;
-        font-family: ${({theme}) => theme.fontFamily};
+        font-family: ${({theme}) => theme.fontFamily} !important;
         transition: all 0.25s linear;
         text-shadow: ${({theme}) => theme.textShadow};
     }
@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
         grid-auto-flow: row;
         grid-template-rows: auto 1fr auto;
         min-height: 100vh;
-        width: 100vw;
+        width: 99vw;
         z-index: 1;
         padding: 1rem;
         transition: padding-top .125s;
@@ -934,7 +934,7 @@ export const GlobalStyles = createGlobalStyle`
 
         input {
             border: none;
-            padding: 5px;
+            padding: 7px;
             border-radius: 5px;
             background-color: ${({theme}) => theme.textTypeBox};
             outline: none;
@@ -966,136 +966,216 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: start;
         gap: 0;
     }
-    /* Profile container styles */
+ /* Profile.css */
+
 .profile-container {
+    width: 90%;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background: ${({ theme }) => theme.background}; /* Use theme background */
-    color: ${({ theme }) => theme.textTypeBox}; /* Use theme text color */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: auto;
-    gap: 20px; /* Space between elements */
+    padding: 2rem;
+    background-color: var(--background);
+    color: var(--textTypeBox);
 }
 
-/* Profile heading */
 .profile-heading {
-    font-size: 24px;
-    margin: 0; /* Remove margin for uniformity */
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 1rem;
 }
 
-/* User data section */
 .user-data {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align the content */
+    align-items: center;
+    background-color: #007bff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 350px;
 }
 
-/* Profile image */
-.profile-image {
-    width: 100px; /* Adjust width as needed */
-    height: 100px; /* Adjust height as needed */
-    border-radius: 50%; /* Makes the image circular */
-    margin-bottom: 20px; /* Spacing below the image */
-    object-fit: cover;
-}
-
-/* Error message */
-.error-message {
-    color: red;
-    text-align: center; /* Center the error message */
-}
-
-/* Upload section styles */
-.upload-section {
+.profile-image-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Full width */
-    gap: 10px; /* Space between input fields */
+    margin-bottom: 1rem;
 }
 
-/* Flex container for input and button */
-.input-container {
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #fff;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+}
+
+.username {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffba08;
+}
+
+.joined-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+.record-heading {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.wpm {
+    color: #007bff;
+}
+
+.accuracy {
+    color: #ffba08;
+}
+
+.records {
     display: flex;
-    flex-direction: column;
-    width: 100%; /* Full width */
-}
-
-/* File input and URL input styles */
-.file-input, .url-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid ${({ theme }) => theme.textTypeBox}; /* Border color using theme */
-    border-radius: 5px;
-    width: 100%; /* Full width */
-    background: ${({ theme }) => theme.background}; /* Input background */
-    color: ${({ theme }) => theme.textTypeBox}; /* Input text color */
-    margin-bottom: 10px; /* Spacing below inputs */
-}
-
-/* Submit URL button styles */
-.submit-url-button {
-    padding: 10px; /* Button padding */
-    font-size: 16px; /* Button font size */
-    background-color: ${({ theme }) => theme.textTypeBox}; /* Button background */
-    color: ${({ theme }) => theme.background}; /* Button text color */
-    border: none;
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    width: 100%; /* Full width */
-}
-
-.submit-url-button:hover {
-    background-color: #555; /* Darker shade on hover */
-}
-
-/* Download button styles */
-.download-button {
-    padding: 10px 20px; /* Bigger padding for a larger button */
-    font-size: 16px; /* Increase font size */
-    background-color: ${({ theme }) => theme.textTypeBox}; /* Button background */
-    color: ${({ theme }) => theme.background}; /* Button text color */
-    border: none;
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    width: 100%; /* Full width */
-}
-
-/* Button hover effect */
-.download-button:hover {
-    background-color: #555; /* Darker shade for hover effect */
-}
-
-/* Logout section */
-.logout-section {
-    margin-top: 20px;
-    padding: 10px;
-    border-top: 1px solid ${({ theme }) => theme.textTypeBox};
+    justify-content: space-around;
     width: 100%;
-    text-align: center; /* Center align the logout */
+    margin-top: 1rem;
 }
 
-/* Flex styling for logout */
-.logout-button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: ${({ theme }) => theme.textTypeBox};
-    color: ${({ theme }) => theme.background};
-    border: none;
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%; /* Full width */
+.record {
+    background-color: #007bff;
+    color: #ffba08;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    width: 40%;
+    max-width: 120px;
 }
 
-.logout-button:hover {
-    background-color: #555; /* Darker shade on hover */
+.record h4 {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
 }
+
+.record p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.logout-section {
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .records {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .record {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+}
+    /* Container styling */
+    .leaderboard-container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #1c1c1c;
+        color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+.table-user{
+    text-align: left !important;
+    padding: 10px !important;
+}
+    /* Title styling */
+    .leaderboard-title {
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #e0e0e0;
+        margin-bottom: 20px;
+    }
+
+    /* Mode button styling */
+    .mode-buttons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .mode-buttons button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        background-color: #333;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .mode-buttons button:hover {
+        background-color: #555;
+    }
+
+    .mode-buttons .active {
+        background-color: #ffcc00;
+        color: #1c1c1c;
+    }
+
+    /* Table styling */
+    .table-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .table-header {
+        font-weight: bold;
+        padding: 10px 0;
+        background-color: #333;
+        color: #ffcc00;
+        border-radius: 5px;
+    }
+
+    .table-row {
+        display: contents;
+    }
+
+    .table-cell {
+        padding: 10px 0;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border-radius: 5px;
+    }
+
+    /* Error message styling */
+    .error-message {
+        color: #ff6666;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+        .table-container {
+            grid-template-columns: 1fr;
+        }
+
+        .table-header, .table-cell {
+            padding: 15px;
+            font-size: 0.9em;
+        }
+    }
 
 `;

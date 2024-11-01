@@ -5,10 +5,12 @@ const RegisterCom = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleRegister = async (event) => {
         event.preventDefault();
         setError('');
+        setSuccessMessage('');
 
         if (password.length < 8) {
             setError('The password should be at least 8 characters.');
@@ -22,6 +24,11 @@ const RegisterCom = () => {
                 { headers: { 'Content-Type': 'application/json' } }
             );
             console.log('Registration successful:', response.data);
+            // Clear the input fields
+            setUsername('');
+            setPassword('');
+            // Set success message
+            setSuccessMessage('Registration successful! You can now log in.');
         } catch (err) {
             console.error('Registration Error:', err.response?.data || err.message);
             setError(err.response?.data?.message || 'Registration failed. Please check your input.');
@@ -41,7 +48,7 @@ const RegisterCom = () => {
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password at least 8 characters. "
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -49,7 +56,8 @@ const RegisterCom = () => {
 
                 <button type="submit">Register</button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
     );
 };

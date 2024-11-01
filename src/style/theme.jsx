@@ -1,25 +1,27 @@
 const websterTheme = {
   label: "Webster",
-  background: "#FFFFFF", // White background
-  text: "#0D47A1", // Dark blue text similar to the title
-  gradient: "linear-gradient(90deg, #FFD700 0%, #FFEB3B 100%)", // Yellow gradient for buttons
-  title: "#0D47A1", // Dark blue title color
-  textTypeBox: "#1976D2", // Medium blue for text input area
-  stats: "#FFD700", // Gold/yellow stats color
-  fontFamily: "sans-serif",
+  background: "#FFFFFF",
+  text: "#020f38",
+  gradient: "linear-gradient(90deg, #FFD700 0%, #FFEB3B 100%)",
+  title: "#0D47A1",
+  textTypeBox: "#1976D2",
+  stats: "#FFD700",
+  fontFamily: "'Roboto', sans-serif",
   textShadow: "none",
 };
+
 const WebsterDarkTheme = {
   label: "Dark Webster",
-  background: "#000", // White background
-  text: "#0D47A1", // Dark blue text similar to the title
-  gradient: "linear-gradient(90deg, #FFD700 0%, #FFEB3B 100%)", // Yellow gradient for buttons
-  title: "#0D47A1", // Dark blue title color
-  textTypeBox: "#1976D2", // Medium blue for text input area
-  stats: "#FFD700", // Gold/yellow stats color
-  fontFamily: "sans-serif",
+  background: "#000",
+  text: "#FFD700",
+  gradient: "linear-gradient(90deg, #FFD700 0%, #FFEB3B 100%)",
+  title: "#0D47A9",
+  textTypeBox: "#1976D2",
+  stats: "#FFD700",
+  fontFamily: "'Helvetica Neue', sans-serif",
   textShadow: "none",
 };
+
 const lightTheme = {
   label: "Light",
   background: "#F5F5F5",
@@ -28,8 +30,9 @@ const lightTheme = {
   title: "#2979ff",
   textTypeBox: "#9E9E9E",
   stats: "#3D5AFE",
-  fontFamily: "sans-serif",
+  fontFamily: "'Verdana', sans-serif",
 };
+
 const tokyoNightTheme = {
   label: "Tokyo Night",
   background: "#011628",
@@ -38,8 +41,9 @@ const tokyoNightTheme = {
   title: "#ff9e64",
   textTypeBox: "#547998",
   stats: "#B4D0E9",
-  fontFamily: "sans-serif",
+  fontFamily: "'Courier New', monospace",
 };
+
 const darkTheme = {
   label: "Dark",
   background: "#121212",
@@ -48,8 +52,9 @@ const darkTheme = {
   title: "#ffc107",
   textTypeBox: "#706d6d",
   stats: "#BB86FC",
-  fontFamily: "sans-serif",
+  fontFamily: "'Georgia', serif",
 };
+
 const cyberTheme = {
   label: "Cyber",
   background: "#272932",
@@ -58,57 +63,62 @@ const cyberTheme = {
   title: "#FDF500",
   textTypeBox: "#D1C5C0",
   stats: "#00ff9f",
-  fontFamily: "Tomorrow",
+  fontFamily: "'Lucida Console', monospace",
 };
+
 const terminalTheme = {
   label: "Terminal",
-  background: "#000 ",
+  background: "#000",
   text: "#39ff14",
   gradient: "linear-gradient(315deg, #39ff14 0%, #008F11 94%)",
   title: "#008F11",
   textTypeBox: "#706d6d",
   stats: "#39ff14",
-  fontFamily: "Tomorrow",
+  fontFamily: "'Monaco', monospace",
 };
+
 const nintendoTheme = {
   label: "Nintendo",
   background: "#000000",
   text: "#00c3e3",
-  gradient: "linear-gradient(90deg, 	#dd2020 0%, #00c3e3 100%)",
+  gradient: "linear-gradient(90deg, #dd2020 0%, #00c3e3 100%)",
   title: "#dd2020",
   textTypeBox: "#a5a2a2",
   stats: "#00c3e3",
-  fontFamily: "Tomorrow",
+  fontFamily: "'Comic Sans MS', cursive",
 };
+
 const Pale_Light = {
   label: "Pale Light",
   background: "#232335",
   text: "#086063",
-  gradient: "linear-gradient(90deg, 	#232335 0%, #0a4951 100%)",
+  gradient: "linear-gradient(90deg, #232335 0%, #0a4951 100%)",
   title: "#B42D2C",
   textTypeBox: "#CCB1B0",
   stats: "#1a5426",
-  fontFamily: "sans-serif",
+  fontFamily: "'Tahoma', sans-serif",
 };
+
 const PurpleTheme = {
   label: "Purple",
   background: "#6d45a1",
   text: "#1d1a2f",
-  gradient: "linear-gradient(90deg, 	#3f6d4e 0%, #52d053 100%)",
+  gradient: "linear-gradient(90deg, #3f6d4e 0%, #52d053 100%)",
   title: "#52d053",
   textTypeBox: "#50b349",
   stats: "#1d1a2f",
-  fontFamily: "Tomorrow",
+  fontFamily: "'Trebuchet MS', sans-serif",
 };
+
 const aluminiumTheme = {
   label: "Aluminium",
-  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
+  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25), #888B8D)",
   text: "#353535",
   gradient: "linear-gradient(90deg, #888B8D 0%, #FAF9F6 100%)",
   title: "#2f2f2f",
   textTypeBox: "#FAF9F6",
   stats: "#2D3436",
-  fontFamily: "Rufina",
+  fontFamily: "'Arial Black', sans-serif",
   textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
 
@@ -120,7 +130,7 @@ const GreyTheme = {
   title: "#f5f2e7",
   textTypeBox: "#555",
   stats: "#FAF9F6",
-  fontFamily: "Rufina",
+  fontFamily: "'Impact', sans-serif",
   textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
 
@@ -132,32 +142,33 @@ const coolKidTheme = {
   title: "#ECECEC",
   textTypeBox: "#090261",
   stats: "#EA00BA",
-  fontFamily: "Tomorrow",
+  fontFamily: "'Futura', sans-serif",
   textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
+
 const tranquiluxeTheme = {
   label: "Tranquiluxe",
-  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
+  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25), #888B8D)",
   text: "#353535",
   gradient: "linear-gradient(90deg, #888B8D 0%, #FAF9F6 100%)",
   title: "#2f2f2f",
   textTypeBox: "#FAF9F6",
   stats: "#1b2021",
-  fontFamily: "Rufina",
+  fontFamily: "'Century Gothic', sans-serif",
   textShadow: "0px 1px 1px #000000",
 };
+
 const GradientTheme = {
   label: "Lumiflex",
-  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25),  #888B8D)",
+  background: "linear-gradient(to left top, rgba(0, 0, 0, 0.25), #888B8D)",
   text: "#FAF9F6",
   gradient: "linear-gradient(90deg, #888B8D 0%, #FAF9F6 100%)",
   title: "#2f2f2f",
   textTypeBox: "#2f2f2f",
   stats: "#20F0A0",
-  fontFamily: "Rufina",
+  fontFamily: "'Gill Sans', sans-serif",
   textShadow: "2px 0px 2px #888B8D",
 };
-
 
 const velustroTheme = {
   label: "Velustro",
@@ -167,7 +178,7 @@ const velustroTheme = {
   title: "#f5f2e7",
   textTypeBox: "#3E3232",
   stats: "#FAF9F6",
-  fontFamily: "Rufina",
+  fontFamily: "'Segoe UI', sans-serif",
   textShadow: "1px 0px 0px #000000",
 };
 
@@ -187,9 +198,9 @@ const themesOptions = [
   { value: Pale_Light, label: "Pale Light" },
   { value: coolKidTheme, label: "Cool Kid" },
   { value: lightTheme, label: "Light" },
-  { value: tranquiluxeTheme , label: "Red Cloud" },
+  { value: tranquiluxeTheme, label: "Red Cloud" },
   { value: GradientTheme, label: "Gradient" },
-  { value: velustroTheme, label: "Gum " },
+  { value: velustroTheme, label: "Gum" },
 ];
 
 export {

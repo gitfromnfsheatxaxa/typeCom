@@ -17,9 +17,9 @@ const Nav = ({ isFocusedMode }) => {
                 <Link to="/profile">
                     <StyledIcon as={FaUser} />
                 </Link>
-                <Link to="/login">
-                    <StyledIcon as={FaSignInAlt} />
-                </Link>
+                {/*<Link to="/login">*/}
+                {/*    <StyledIcon as={FaSignInAlt} />*/}
+                {/*</Link>*/}
 
 
             </NavRight>

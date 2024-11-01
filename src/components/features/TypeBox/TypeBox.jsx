@@ -885,12 +885,12 @@ const TypeBox = ({textInputRef, isFocusedMode, isUltraZenMode, handleInputFocus,
                                 margin: "20px",
                                 gap: "0 10px"
                             }} title={ENGLISH_MODE_TOOLTIP_TITLE}>
-                                <>
+                                <div display="flex">
                                     <Globe/>
                                     <span className={getLanguageButtonClassName(ENGLISH_MODE)}>
                                   english
                                 </span>
-                                </>
+                                </div>
                             </Tooltip>
                         </Box>
                     )}

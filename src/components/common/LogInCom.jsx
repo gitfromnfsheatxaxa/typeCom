@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const LogInCom = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [nickname, setNickname] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -27,15 +26,9 @@ const LogInCom = () => {
 
             // Check if the access_token is valid before storing
             if (access_token) {
-                // Save token, nickname, and registration date to local storage
                 localStorage.setItem('access_token', access_token);
-                localStorage.setItem('nickname', nickname );
-                localStorage.setItem('nickname', nickname || responseUsername);
+                localStorage.setItem('username', username );
 
-                // You might not have a registration date in this response, so adjust accordingly
-                // localStorage.setItem('registrationDate', created);
-
-                // Navigate to the profile page upon successful login
                 navigate('/profile');
             } else {
                 console.error('Access token is undefined'); // Log if the token is not present
@@ -51,13 +44,7 @@ const LogInCom = () => {
         <div>
             <h2>Login</h2>
             <form className="form-flex" onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    placeholder="Nickname"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
-                    required
-                />
+
                 <input
                     type="text"
                     placeholder="Username"
