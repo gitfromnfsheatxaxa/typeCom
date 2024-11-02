@@ -938,7 +938,7 @@ export const GlobalStyles = createGlobalStyle`
             border-radius: 5px;
             background-color: ${({theme}) => theme.textTypeBox};
             outline: none;
-            
+
         }
 
         input::placeholder {
@@ -966,158 +966,110 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: start;
         gap: 0;
     }
- /* Profile.css */
 
-.profile-container {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: var(--background);
-    color: var(--textTypeBox);
-}
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: ${({ theme }) => theme.background};
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.profile-heading {
-    font-size: 2rem;
-    color: #007bff;
-    margin-bottom: 1rem;
-}
+    .profile-title {
+        font-family: 'Arial', sans-serif;
+        font-size: 24px;
+        color: ${({ theme }) => theme.stats};
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-.user-data {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #007bff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 350px;
-}
+    .error-message {
+        color: red;
+        text-align: center;
+    }
 
-.profile-image-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.profile-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #fff;
-    object-fit: cover;
-    margin-bottom: 0.5rem;
-}
-
-.username {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffba08;
-}
-
-.joined-date {
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 0.2rem;
-}
-
-.record-heading {
-    margin-top: 1.5rem;
-    font-size: 1.2rem;
-    color: #888;
-}
-
-.wpm {
-    color: #007bff;
-}
-
-.accuracy {
-    color: #ffba08;
-}
-
-.records {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 1rem;
-}
-
-.record {
-    background-color: #007bff;
-    color: #ffba08;
-    padding: 1rem;
-    border-radius: 8px;
-    text-align: center;
-    width: 40%;
-    max-width: 120px;
-}
-
-.record h4 {
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-}
-
-.record p {
-    margin: 0;
-    font-size: 1.1rem;
-}
-
-.logout-section {
-    margin-top: 1.5rem;
-}
-
-@media (max-width: 480px) {
-    .records {
+    .table-container {
+        display: flex;
         flex-direction: column;
-        align-items: center;
+        width: 100%;
     }
 
-    .record {
-        width: 80%;
-        margin-bottom: 1rem;
+    .table-header {
+        font-weight: bold;
+        background-color: #343a40;
+        color: white;
+        padding: 10px;
     }
-}
-    /* Container styling */
+
+    .table-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .table-cell {
+        flex: 1;
+        padding: 10px;
+        color: ${({ theme }) => theme.stats};
+        text-align: center;
+    }
+
+    .table-user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-message {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+    }
+
+
+
+    /* Leaderboard Container Styling */
     .leaderboard-container {
         width: 90%;
         margin: 20px auto;
         padding: 20px;
-        background-color: #1c1c1c;
-        color: #ffffff;
+        color: ${({theme}) => theme.stats};
+        background-color: ${({theme}) => theme.textTypeBox};
         border-radius: 8px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     }
-.table-user{
-    text-align: left !important;
-    padding: 10px !important;
-}
-    /* Title styling */
+
+    .table-user {
+        text-align: left !important;
+        padding: 10px !important;
+    }
+
+    /* Title Styling */
     .leaderboard-title {
         text-align: center;
         font-size: 1.5em;
         font-weight: bold;
-        color: #e0e0e0;
+        color: ${({theme}) => theme.stats};
         margin-bottom: 20px;
     }
 
-    /* Mode button styling */
+    /* Mode Button Styling */
     .mode-buttons {
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
+
     }
 
     .mode-buttons button {
+        width: 25%;
+        border: 1px solid ${({theme}) => theme.text};
         padding: 10px 20px;
         margin: 0 5px;
-        background-color: #333;
-        color: #ffffff;
-        border: none;
+        color: ${({theme}) => theme.stats};
+        background-color: ${({theme}) => theme.textTypeBox};
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
@@ -1128,11 +1080,11 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .mode-buttons .active {
-        background-color: #ffcc00;
-        color: #1c1c1c;
+        color: ${({theme}) => theme.stats};
+        background-color: ${({theme}) => theme.textTypeBox};
     }
 
-    /* Table styling */
+    /* Table Styling */
     .table-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1142,10 +1094,13 @@ export const GlobalStyles = createGlobalStyle`
 
     .table-header {
         font-weight: bold;
-        padding: 10px 0;
-        background-color: #333;
-        color: #ffcc00;
+        padding: 10px;
+        background-color: ${({theme}) => theme.stats};
+        color: ${({theme}) => theme.title};
         border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .table-row {
@@ -1154,28 +1109,42 @@ export const GlobalStyles = createGlobalStyle`
 
     .table-cell {
         padding: 10px 0;
-        background-color: #2a2a2a;
-        color: #e0e0e0;
+        color: ${({theme}) => theme.stats};
+        background-color: ${({theme}) => theme.textTypeBox};
         border-radius: 5px;
     }
 
-    /* Error message styling */
+    /* Error Message Styling */
     .error-message {
         color: #ff6666;
         text-align: center;
         margin-bottom: 20px;
     }
 
-    /* Responsive design */
+    /* Responsive Design */
     @media (max-width: 600px) {
         .table-container {
             grid-template-columns: 1fr;
         }
 
-        .table-header, .table-cell {
+        .table-header,
+        .table-cell {
             padding: 15px;
             font-size: 0.9em;
         }
     }
+
+    @media (max-width: 480px) {
+        .records {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .record {
+            width: 80%;
+            margin-bottom: 1rem;
+        }
+    }
+
 
 `;

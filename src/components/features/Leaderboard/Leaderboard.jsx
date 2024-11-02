@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { FaCrown } from 'react-icons/fa'; // Import the crown icon
 
 const LeaderboardPage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -13,7 +14,9 @@ const LeaderboardPage = () => {
     const fetchLeaderboard = async () => {
         try {
             const response = await axios.get(`https://ulugbek5800.pythonanywhere.com/api/leaderboard?mode=${mode}`);
-            setLeaderboard(response.data.leaderboard);
+            // Sort leaderboard by highest WPM in descending order
+            const sortedLeaderboard = response.data.leaderboard.sort((a, b) => b.highest_wpm - a.highest_wpm);
+            setLeaderboard(sortedLeaderboard);
         } catch (err) {
             setError("Failed to load leaderboard.");
             console.error(err);
@@ -36,7 +39,10 @@ const LeaderboardPage = () => {
                 <div className="table-header">Highest WPM</div>
                 {leaderboard.map((user, index) => (
                     <div className="table-row" key={index}>
-                        <div className="table-cell table-user">  {user.username}</div>
+                        <div className="table-cell table-user">
+                            {index === 0 && <FaCrown style={{ color: 'gold', marginRight: '5px' }} />}
+                            {index + 1} {user.username}
+                        </div>
                         <div className="table-cell">{user.highest_wpm}</div>
                     </div>
                 ))}
