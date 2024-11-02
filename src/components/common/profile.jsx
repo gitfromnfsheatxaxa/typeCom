@@ -133,7 +133,7 @@ const ProfilePage = () => {
                     <div className="table-container">
                         <div className="table-header">Highest WPM (Normal)</div>
                         <div className="table-cell">
-                            {userData.highest_wpm_normal !== undefined ? userData.highest_wpm_normal : 'N/A'} WPM
+                            {userData.highest_wpw_normal !== undefined ? userData.highest_wpw_normal : 'N/A'} WPM
                         </div>
                         <div className="table-header">Highest WPM (Hard)</div>
                         <div className="table-cell">
