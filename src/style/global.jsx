@@ -26,11 +26,10 @@ export const GlobalStyles = createGlobalStyle`
     .canvas {
         align-items: center;
         display: grid;
-        gap: 1rem;
         grid-auto-flow: row;
         grid-template-rows: auto 1fr auto;
         min-height: 100vh;
-        width: 99vw;
+        width: 100vw;
         z-index: 1;
         padding: 1rem;
         transition: padding-top .125s;
@@ -54,7 +53,6 @@ export const GlobalStyles = createGlobalStyle`
         padding: 40px; /* Increased padding */
         border-radius: 8px;
         position: relative; /* To position the close button */
-        max-width: 600px; /* Max width to keep it from getting too large */
         height: auto; /* Allow height to grow with content */
     }
 
@@ -209,7 +207,6 @@ export const GlobalStyles = createGlobalStyle`
 
     .wordscard-UI {
         display: block;
-        max-width: 1000px;
         margin: 150px auto 20px auto;
         bottom: 10%;
     }
@@ -222,7 +219,6 @@ export const GlobalStyles = createGlobalStyle`
 
     .keyboard-stats {
         display: flex;
-        max-width: 1000px;
         margin: 50px auto 20px auto;
         color: ${({theme}) => theme.stats};
         bottom: 10%;
@@ -787,7 +783,7 @@ export const GlobalStyles = createGlobalStyle`
     .Catalog {
         list-style-type: none;
         padding: 10px;
-        max-height: 300px;
+        max-height: 200px;
         margin-bottom: 5px;
         overflow: hidden;
         overflow-y: scroll;
@@ -968,20 +964,19 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .profile-container {
-        max-width: 600px;
         margin: 0 auto;
         padding: 20px;
-        background-color: ${({ theme }) => theme.background};
+        background-color: ${({theme}) => theme.background};
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
     }
 
     .profile-title {
         font-family: 'Arial', sans-serif;
         font-size: 24px;
-        color: ${({ theme }) => theme.stats};
-        text-align: center;
-        margin-bottom: 20px;
+        color: ${({theme}) => theme.stats};
+        margin: 10px 0;
     }
 
     .error-message {
@@ -989,10 +984,72 @@ export const GlobalStyles = createGlobalStyle`
         text-align: center;
     }
 
+    .loading-message {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+    }
+
+    .profile-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-picture-section {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-up-del {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .username-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
     .table-container {
         display: flex;
         flex-direction: column;
         width: 100%;
+    }
+
+    .image-con {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-row {
+        margin: 20px 0;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .table-header {
@@ -1002,32 +1059,47 @@ export const GlobalStyles = createGlobalStyle`
         padding: 10px;
     }
 
-    .table-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        border-bottom: 1px solid #dee2e6;
-    }
-
     .table-cell {
-        flex: 1;
         padding: 10px;
-        color: ${({ theme }) => theme.stats};
+        color: ${({theme}) => theme.stats};
         text-align: center;
     }
 
-    .table-user {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .logout-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: ${({theme}) => theme.stats};
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
-    .loading-message {
-        text-align: center;
-        font-style: italic;
-        color: #666;
+    .upload-button,
+    .delete-button {
+        padding: 10px 15px;
+        background-color: ${({theme}) => theme.stats}; /* Use your theme color */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        font-size: 14px; /* Adjust font size as needed */
     }
 
+    .upload-button:hover,
+    .delete-button:hover {
+        color: ${({theme}) => theme.stats};
+        background-color: ${({theme}) => theme.textTypeBox}; /* Change to a lighter shade or another theme color */
+    }
+
+    .upload-button:active,
+    .delete-button:active {
+    }
+
+    .upload-button {
+        margin-right: 10px; /* Add margin to separate buttons */
+    }
 
 
     /* Leaderboard Container Styling */
