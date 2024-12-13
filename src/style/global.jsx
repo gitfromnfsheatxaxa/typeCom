@@ -29,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
         grid-auto-flow: row;
         grid-template-rows: auto 1fr auto;
         min-height: 100vh;
-        width: 100vw;
+        width: 90vw;
         z-index: 1;
         padding: 1rem;
         transition: padding-top .125s;
